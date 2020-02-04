@@ -1,0 +1,17 @@
+/* Header */
+header {
+    background: gray;
+    /* height: 500px;
+    background-image: url("../img/header.png");
+    background-repeat: no-repeat;
+    background-size: cover; */
+}
+
+/* Main banner */
+#header-banner {
+    margin-top: 50px;
+}
+#main-image {
+    max-height: 500px;
+    min-height: 200px;
+}
