@@ -1,6 +1,13 @@
+/* Global */
+.trungtam {
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: 100%;
+}
+
 /* Header */
 header {
-    background: gray;
     /* height: 500px;
     background-image: url("../img/header.png");
     background-repeat: no-repeat;
@@ -8,12 +15,6 @@ header {
 }
 
 /* Main banner */
-#header-banner {
-}
-#main-image {
-    max-height: 500px;
-    min-height: 200px;
-}
 
 /* Navbar */
 .dropdown:hover>.dropdown-menu {
@@ -22,13 +23,97 @@ header {
 .dropdown>.dropdown-toggle:active {
     pointer-events: none;
 }
+/* Section */
+section {
+    margin-bottom: 20px;
+}
+section.data-section {
+    padding: 10px 30px 10px 30px;
+}
+section>h2>a {
+    color: black;
+    text-decoration: none;
+    border-bottom: 3px solid black;
+    margin-left: -7px;
+    text-transform: uppercase;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+section>h2>a:hover {
+    color: brown;
+    text-decoration: none;
+    border-bottom: 3px solid brown;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+/* Sản phẩm, Đào tạo */
+#sanpham-content .iSanPham a, #daotao-content .iDaoTao a {
+    text-decoration: none;
+    opacity: .7;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+#sanpham-content .iSanPham a div, #daotao-content .iDaoTao a div {
+    opacity: 0;
+    font-size: 40px;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    vertical-align: middle;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    text-shadow: 10px 10px 10px black;
+}
+#sanpham-content .iSanPham a:hover>div, #daotao-content .iDaoTao a:hover>div {
+    opacity: 1;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+    -moz-transform: rotate(10deg);
+    -webkit-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    transform: rotate(10deg);
+}
+#sanpham-content .iSanPham a:hover, #daotao-content .iDaoTao a:hover {
+    opacity: 1;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
+}
+
+/* Icon */
+.fa-facebook:hover, .fa-youtube:hover {
+    color: white;
+}
 
 /* Footer */
 footer .col-md-4 {
-    padding: 30px;
+    padding: 20px 30px 10px 30px;
 }
 footer .fa {
     font-size: 50px;
     padding-right: 10px;
     color: gray;
+}
+footer h5 {
+    margin-bottom: 15px;
+    border-bottom: 2px dashed white;
+    padding-bottom: 10px;
 }
