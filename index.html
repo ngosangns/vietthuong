@@ -6,16 +6,25 @@
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
         <link rel="stylesheet" href="./css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     </head>
     <body>
         <div id="container" class="container-fluid p-0 m-0">
             <header>
-                <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+                <div id="header-banner">
+                    <center>
+                        <div id="main-banner">
+                            <a id="main-link">
+                                <img id="main-image" class="img-fluid" src="./img/header.png"/>
+                            </a>
+                        </div>
+                    </center>
+                </div>
+                <nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-light">
                     <a class="navbar-brand" href="#">Navbar</a>
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                       <span class="navbar-toggler-icon"></span>
                     </button>
-                  
                     <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                         <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                             <li class="nav-item active">
@@ -52,19 +61,47 @@
                         </ul>
                     </div>
                 </nav>
-                <div id="header-banner">
-                    <center>
-                        <div id="main-banner">
-                            <a id="main-link">
-                                <img id="main-image" class="img-fluid" src="./img/header.png"/>
-                            </a>
-                        </div>
-                        <div id="iframe">
-                            <iframe width="100%" height="500px" src="https://www.youtube.com/embed/B0VsCaUk30Y" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                        </div>
-                    </center>
-                </div>
+                <center>
+                    <div id="iframe">
+                        <iframe src="https://albumizr.com/a/9k88" scrolling="no" frameborder="0" allowfullscreen width="100%" height="1000px"></iframe>
+                    </div>
+                </center>
             </header>
+            <footer class="row">
+                <div class="col-md-4">
+                    <h5>Công ty ABC</h5>
+                    <p>
+                        Số điện thoại: <b>+1234567890</b><br/>
+                        Địa chỉ: <b>Bình Tân, Tp. Hồ Chí Minh</b><br/>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <h5>Social</h5>
+                    <p>
+                        <a href="https://fb.me/ngosangns"><i class="fa fa-facebook"></i></a>
+                        <a href="https://www.youtube.com/channel/UCFZLxX31-eJVJlEHTcwC5DA"><i class="fa fa-youtube"></i></a>
+                    </p>
+                </div>
+                <div class="col-md-4">
+                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1355207326615!2d106.65516191417197!3d10.800930961695874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529373fd49db9%3A0xdb6fc80aa6c3239c!2zMTdhIEPhu5luZyBIw7JhLCBQaMaw4budbmcgNCwgVMOibiBCw6xuaCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1580820177526!5m2!1svi!2s" width="100%" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                </div>
+            </footer>
         </div>
+        <script>
+
+            // Fixed menu on scroll
+            window.onscroll = function() {
+                fixedMenu();
+            };
+            var mainMenu = document.getElementById("main-menu");
+            var stickyMenu = mainMenu.offsetTop;
+            function fixedMenu() {
+                if (window.pageYOffset > stickyMenu) {
+                    mainMenu.classList.add("fixed-top");
+                } else {
+                    mainMenu.classList.remove("fixed-top");
+                }
+            }
+        </script>
     </body>
 </html>
