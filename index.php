@@ -9,7 +9,7 @@
 			<?php nav(); ?>
 			<center>
             <section id="iframe">
-                <iframe id="iframe-content" src="https://albumizr.com/a/9k88" scrolling="no" frameborder="0" allowfullscreen width="100%" height="0"></iframe>
+                <iframe src="https://albumizr.com/a/QWYm" scrolling="no" frameborder="0" allowfullscreen width="100%" height="400"></iframe>
             </section>
             </center>
 			<div class="container mx-auto">
