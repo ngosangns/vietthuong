@@ -10,6 +10,10 @@
     {
         return preg_match("/[!#$%^&*\=\[\]{};':\"\\<>\/?]/", $string_query);
     }
+    function remove_special(string $string_query)
+    {
+        return preg_replace("/[!#$%^&*\=\[\]{};':\"\\<>\/?]/", "", $string_query);
+    }
 
     // lay san pham tu mySQL
     function lay_san_pham(string $query_key="", string $query_data="") {
@@ -50,39 +54,16 @@
         if(isset($result['username'])) return 1;
         else return 0;
     }
-    function edit(string $type, string $id, string $edit_action, string $edit_data) {
-        if(check_special($type)||check_special($id)||check_special($edit_action)||check_special($edit_data)) return 0;
-        if($edit_action=="price") $edit_data = intval($edit_data);
-        $sql_query = "UPDATE `".$type."` SET `".$edit_action."`='".($edit_action=="password"?md5($edit_data):$edit_data)."' WHERE `id`='".$id."'";
-        if(mysqli_query($GLOBALS['db_connect'], $sql_query)) return true;
-        else return false;
-    }
-    function delete(string $type, string $id) {
-        if(check_special($type)||check_special($id)) return 0;
-        $sql_query = "DELETE FROM `".$type."` WHERE `id`='".$id."'";
-        if(mysqli_query($GLOBALS['db_connect'], $sql_query)) {
-            if($type=="user") {
-                $sql_query = "DELETE FROM `product` WHERE `userid`=".$id."";
-                mysqli_query($GLOBALS['db_connect'], $sql_query);
-                if($id==$_COOKIE['userid']) delete_cookie();
-            }
-            return true;
-        }
-        else return false;
-    }
-    function delete_cookie() {
-        setcookie('userid', "", time()-100, "/");
-        setcookie('password',"", time()-100, "/");
-        unset($_COOKIE['userid']);
-        unset($_COOKIE['password']);
-    }
-    function search(string $search_query) {
+    function search(string $search_query, string $layout = "product", string $excludee = "") {
         if(check_special($search_query)) die_custom("Query không được chứa kí tự đặc biệt.", "./");
-        $sql_query = "SELECT * FROM `product` WHERE `name` LIKE '%".$search_query."%' OR `category` LIKE '%".$search_query."%'";
+        $excludee_query = "";
+        if($excludee != "") $excludee_query = " AND NOT `id` = ".$excludee;
+        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".$search_query."%' OR `category` LIKE '%".$search_query."%')".$excludee_query;
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $sql_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
         while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
-            $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
+            if($layout == "product")
+                $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
             $array_sp[] = $sanpham;
         }
         return $array_sp;
@@ -129,12 +110,10 @@
             <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
             <script src="./js/sanpham.js"></script>
-            <script src="./js/daotao.js"></script>
-            <script src="./js/dichvuchinh.js"></script>
         </head>
         <?php
     }
-    function nav($slider = true) { // menu trang web
+    function nav() { // menu trang web
         ?>
 		<header>
             <div id="header-banner">
@@ -159,19 +138,21 @@
                             <a class="nav-link" href="#">GIỚI THIỆU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">TIN TỨC-SỰ KIỆN</a>
+                            <a class="nav-link" href="tintuc.php">TIN TỨC-SỰ KIỆN</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#daotao" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ĐÀO TẠO</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">KHÓA HỌC PIANO</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC GUITAR</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC UKULELE</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC VIOLIN</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC ORGAN</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC THANH NHẠC</a>
-                                <a class="dropdown-item" href="#">KHÓA HỌC ABRSM</a>
-                                <a class="dropdown-item" href="#">ĐÀO TẠO NHẠC CÔNG</a>
+                                <a class="dropdown-item" href="./#daotao">KHÓA HỌC:</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC PIANO</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC GUITAR</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC UKULELE</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC VIOLIN</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC ORGAN</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC THANH NHẠC</a>
+                                <a class="dropdown-item" href="#">- KHÓA HỌC ABRSM</a>
+                                <a class="dropdown-item" href="#">- ĐÀO TẠO NHẠC CÔNG</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -190,7 +171,7 @@
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#dichvuchinh">DỊCH VỤ</a>
+                            <a class="nav-link" href="./#dichvuchinh">DỊCH VỤ</a>
                         </li>
                         <?php
                             if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) {
@@ -199,8 +180,8 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#sanpham" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMIN</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./upload.php">ĐĂNG SẢN PHẨM</a>
-                                <a class="dropdown-item" href="./uploadpost.php">ĐĂNG BÀI VIẾT</a>
+                                <a class="dropdown-item" href="./upload-sanpham.php">ĐĂNG SẢN PHẨM</a>
+                                <a class="dropdown-item" href="./upload-baiviet.php">ĐĂNG BÀI VIẾT</a>
                                 <a class="dropdown-item" href="./quanli-sanpham.php">QUẢN LÍ SẢN PHẨM</a>
                                 <a class="dropdown-item" href="./quanli-baiviet.php">QUẢN LÍ BÀI VIẾT</a>
                                 <a class="dropdown-item" href="./login.php?logout">ĐĂNG XUẤT</a>
@@ -232,7 +213,7 @@
     }
     function foot() { // chan trang web
         ?>
-		<footer class="row bg-dark text-white">
+		<footer class="row bg-dark text-white mt-5">
             <div class="col-md-4">
                 <h5>Công ty ABC</h5>
                 <p>
@@ -254,9 +235,7 @@
         </footer>
         <script>
             // Fixed menu on scroll
-            window.onscroll = function() {
-                fixedMenu();
-            };
+            window.onscroll = function() { fixedMenu() };
             var mainMenu = document.getElementById("main-menu");
             var stickyMenu = mainMenu.offsetTop;
             function fixedMenu() {
@@ -266,12 +245,12 @@
                     mainMenu.classList.remove("fixed-top");
                 }
             }
+
             var iframeContent = document.getElementById("iframe-content");
             var mapContent = document.getElementById("map-content");
-            var iSanPham = document.querySelectorAll("#sanpham-content .iSanPham");
-            var iDaoTao = document.querySelectorAll("#daotao-content .iDaoTao");
-            var iDichVuChinh = document.querySelectorAll("#dichvuchinh-content .col-md-4");
-            var iTinTuc = document.querySelectorAll("#tintuc .col-md-4");
+            var iGrid = document.querySelectorAll(".iGrid");
+            var iTin = document.querySelectorAll(".iTin .col-md-4");
+            var iTrungTam = document.querySelectorAll(".trungtam");
             // Window onresize event
             window.addEventListener("resize", responsiveWidth);
             // Set height to responsive elements
@@ -280,23 +259,90 @@
                     mapContent.height = mapContent.offsetWidth;
                 if(iframeContent!=null)
                     iframeContent.height = iframeContent.offsetWidth*.25;
-                for(var i=0; i<iSanPham.length; i++)
-                    iSanPham[i].style.cssText += "; height: "+iSanPham[i].offsetWidth*0.5+"px;";
-                for(var i=0; i<iDaoTao.length; i++)
-                    iDaoTao[i].style.cssText += "; height: "+iDaoTao[i].offsetWidth*0.5+"px;";
-                for(var i=0; i<iDichVuChinh.length; i++)
-                    iDichVuChinh[i].style.cssText += "; height: "+iDichVuChinh[i].offsetWidth*0.5+"px;";
-                for(var i=0; i<iTinTuc.length; i++)
-                    iTinTuc[i].style.cssText += "; height: "+iTinTuc[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iGrid.length; i++)
+                    iGrid[i].style.cssText += "; height: "+iGrid[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iTin.length; i++)
+                    iTin[i].style.cssText += "; height: "+iTin[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iTrungTam.length; i++)
+                    iTrungTam[i].style.cssText += "; top: "+(iTrungTam[i].parentElement.offsetHeight-iTrungTam[i].offsetHeight)*0.5+"px;";
             }
             responsiveWidth();
-            
-            // Custom CSS
-            var iTrungTam = document.getElementsByClassName("trungtam");
-            for(var i=0; i<iTrungTam.length; i++) {
-                iTrungTam[i].style.top = (iTrungTam[i].parentElement.offsetHeight-iTrungTam[i].offsetHeight)*0.5;
-            }
         </script>
         <?php
+    }
+    function contentTop(string $titleHeader = "") {
+        ?>
+        <!DOCTYPE html>
+        <html>
+            <?php head($titleHeader); ?>
+            <body>
+                <div id="container" class="container-fluid p-0 m-0">
+        <?php nav(); ?>
+        <div class="mt-5"></div>
+        <?php
+    }
+    function contentBottom($enableFoot = true) {
+        if($enableFoot) foot();
+        else {
+            ?>
+            <footer class="mt-5"></footer>
+            <?php
+        }
+        ?>
+                </div>
+            </body>
+        </html>
+        <?php
+    }
+    function checkDangNhap() {
+        if(!isset($_COOKIE['userid']) && !isset($_COOKIE['password'])) die_custom("Bạn chưa đăng nhập", "./login.php");
+        if(kt_level($_COOKIE['userid'], $_COOKIE['password'])==0) die_custom("Tài khoản sai", "./login.php?logout");
+    }
+    function addContent(string $layout, string $action) {
+        // Kiểm tra name/category
+        if(!isset($_POST['name']) || !isset($_POST['category'])) return;
+        if(strlen($_POST['name'])==0 || strlen($_POST['category'])==0) die_custom("Các trường đánh dấu * là bắt buộc.");
+        // Kiểm tra comment
+        $comment = ""; if(isset($_POST['comment'])) $comment = $_POST['comment'];
+        // Kiểm tra id
+        $id = ""; if(isset($_POST['id'])) $id = $_POST['id'];
+        // Kiểm tra avatar
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], "SELECT `image` FROM `".$layout."` WHERE `id` = '".$id."'") or die_custom("Có lỗi khi cập nhật sản phẩm");
+        $sanpham = mysqli_fetch_assoc($db_sanpham);
+        $avtNotFound = "./img/notfound.png";
+        if($sanpham!=null && sizeof($sanpham)>0) {
+            if($sanpham["image"]!=$avtNotFound && $sanpham["image"]!="") $avatar_path = $sanpham["image"];
+            else $avatar_path=$avtNotFound;
+        }
+        else $avatar_path = $avtNotFound;
+        if(isset($_FILES['image']) && $_FILES['image']['error']!=4) {
+            if($_FILES['image']['error']>0) die_custom("Lỗi upload file");
+            $avatar_path_old = $avatar_path;
+            $avatar_path = "./img/data/".(string)md5($_FILES['image']['tmp_name']).(string)time();
+            move_uploaded_file($_FILES['image']['tmp_name'], $avatar_path) or die_custom("Lỗi khi cập nhật sản phẩm");
+            if($avatar_path_old != $avtNotFound && $avatar_path_old!="")
+                try { unlink($avatar_path_old); } catch(Exception $e) {}
+        }
+        if($layout == "post") {
+            // Kiểm tra description
+            $descr = ""; if(isset($_POST['descr'])) $descr = $_POST['descr'];
+            // Nhập/Update bài viết
+            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `image` = '".$avatar_path."', `descr` = '".$descr."', `comment` = '".$comment."' WHERE `id` = ".$id."";
+            else $sql_query = "INSERT INTO `post`(`name`, `category`, `image`, `descr`, `comment`) VALUES('".$_POST['name']."', '".$_POST['category']."', '".$avatar_path."', '".$descr."', '".$comment."')";
+            mysqli_query($GLOBALS['db_connect'], $sql_query) or die("Lỗi khi cập nhật bài viết");
+            die_custom("Cập nhật bài viết thành công", "./quanli-baiviet.php");
+        }
+        if($layout == "product") {
+            // Kiếm tra code sản phẩm
+            if(!isset($_POST['code'])) return;
+            if(strlen($_POST['code'])==0) die_custom("Các trường đánh dấu * là bắt buộc.");
+            // Kiểm tra giá sản phẩm
+            if(isset($_POST['price'])) $giasp=(int)$_POST['price'];
+            // Nhập/Update sản phẩm
+            if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".$_POST['code']."', `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `price` = '".$giasp."', `image` = '".$avatar_path."', `comment` = '".$comment."' WHERE `id` = ".$id."";
+            else $sql_query = "INSERT INTO `product`(`code`, `name`, `category`, `price`, `image`, `comment`) VALUES('".$_POST['code']."', '".$_POST['name']."', '".$_POST['category']."', ".$giasp.", '".$avatar_path."', '".$comment."')";
+            mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật sản phẩm");
+            die_custom("Cập nhật sản phẩm thành công", "./quanli-sanpham.php");
+        }
     }
 ?>

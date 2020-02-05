@@ -15,20 +15,51 @@
 			<div class="container mx-auto">
 					<!-- Sản phẩm -->
 					<section id="sanpham" class="data-section">
-						<h2><a href="#sanpham">Sản phẩm</a></h2>
+						<h2><a>Sản phẩm</a></h2>
 						<div id="sanpham-content" class="row"></div>
 					</section>
-
 					<!-- Đào tạo -->
 					<section id="daotao" class="data-section">
-						<h2><a href="#daotao">Đào tạo</a></h2>
-						<div id="daotao-content" class="row"></div>
+						<h2><a>Đào tạo</a></h2>
+						<div class="row">
+							<?php
+							$dichvuchinhPosts = search("ĐÀO TẠO - ", "post");
+							if(sizeof($dichvuchinhPosts)>0) {
+								for($i=0; $i<sizeof($dichvuchinhPosts); $i++) {
+									?>
+									<div class="col-sm-4 iGrid p-2">
+										<a class="d-block w-100 h-100" href="./baiviet.php?id=<?php echo $dichvuchinhPosts[$i]['id']; ?>"  style="background-image:url(<?php echo $dichvuchinhPosts[$i]['image']; ?>); background-size: cover;">
+											<div class="trungtam"><?php echo preg_replace("/ĐÀO TẠO - /", "", $dichvuchinhPosts[$i]['name']); ?></div>
+										</a>
+									</div>
+									<?php
+								}
+							}
+							?>
+						</div>
 					</section>
 
 					<!-- Dịch vụ chính -->
 					<section id="dichvuchinh" class="data-section">
-						<h2><a href="#dichvuchinh">Dịch vụ chính</a></h2>
-						<div id="dichvuchinh-content" class="row"></div>
+						<h2><a>Dịch vụ chính</a></h2>
+						<div id="dichvuchinh-content" class="row">
+							<?php
+							$dichvuchinhPosts = search("Dịch vụ chính -", "post");
+							if(sizeof($dichvuchinhPosts)>0) {
+								for($i=0; $i<sizeof($dichvuchinhPosts); $i++) {
+									$iImage = '<div class="col-md-4 '.($i%2==0?'mb-4':'').'"><a class="d-block w-100 h-100" href="./baiviet.php?id='.$dichvuchinhPosts[$i]["id"].'" style="background-image:url('.$dichvuchinhPosts[$i]["image"].'); background-size: cover;"></a></div>';
+									$iContent = '<div class="col-md-8"><h5><a class="text-dark text-decoration-none" href="./baiviet.php?id='.$dichvuchinhPosts[$i]["id"].'">'.preg_replace("/DỊCH VỤ CHÍNH - /", "", $dichvuchinhPosts[$i]["name"]).'</a></h5><p class="d-block w-100">'.$dichvuchinhPosts[$i]["descr"].'</p></div>';
+									?>
+									<div class="col-sm-12 iTin mt-4" <?php echo ($i<sizeof($dichvuchinhPosts)-1?'style="border-bottom: 1px dashed black"':'') ?>>
+										<div class="row mb-4">
+											<?php echo ($i%2==0?($iImage.$iContent):($iContent.$iImage)); ?>
+										</div>
+									</div>
+									<?php
+								}
+							}
+							?>
+						</div>
 					</section>
 			</div>
 			<script>
@@ -36,8 +67,8 @@
 				function appendSanPham() {
 					for(var i=0; i<sanpham.length; i++) {
 						document.getElementById("sanpham-content").innerHTML += `
-							<div class="col-sm-4 iSanPham p-2">
-								<a class="d-block w-100 h-100" href="#"  style="background-image:url(./img/sanpham/`+sanpham[i].image+`); background-size: cover;">
+							<div class="col-sm-4 iGrid p-2">
+								<a class="d-block w-100 h-100" href="`+sanpham[i].link+`" style="background-image:url(./img/sanpham/`+sanpham[i].image+`); background-size: cover;">
 									<div class="trungtam">`+sanpham[i].name+`</div>
 								</a>
 							</div> 
@@ -45,43 +76,6 @@
 					}
 				}
 				appendSanPham();
-
-				// Đào tạo
-				function appendDaoTao() {
-					for(var i=0; i<daotao.length; i++) {
-						document.getElementById("daotao-content").innerHTML += `
-							<div class="col-sm-4 iDaoTao p-2">
-								<a class="d-block w-100 h-100" href="#"  style="background-image:url(./img/daotao/`+daotao[i].image+`); background-size: cover;">
-									<div class="trungtam">`+daotao[i].name+`</div>
-								</a>
-							</div> 
-						`;
-					}
-				}
-				appendDaoTao();
-
-				// Dịch vụ chính
-				function appendDichVuChinh() {
-					for(var i=0; i<dichvuchinh.length; i++) {
-						var iImage = `<div class="col-md-4 `+(i%2==0?`mb-4`:``)+`">
-										<a class="iDichVuChinh-image d-block w-100 h-100" href="#" style="background-image:url(./img/dichvuchinh/`+dichvuchinh[i].image+`); background-size: cover;"></a>
-									</div>`;
-						var iContent = `<div class="col-md-8">
-											<h5>`+dichvuchinh[i].name+`</h5>
-											<p class="d-block w-100">
-												`+dichvuchinh[i].content+`
-											</p>
-										</div>`;
-						document.getElementById("dichvuchinh-content").innerHTML += `
-							<div class="col-sm-12 iDichVuChinh mt-4" `+(i<dichvuchinh.length-1?`style="border-bottom: 1px dashed black"`:``)+`>
-								<div class="row mb-4">
-									`+(i%2==0?(iImage+iContent):(iContent+iImage))+`
-								</div>
-							</div>
-						`;
-					}
-				}
-				appendDichVuChinh();
 			</script>
 			<?php foot(); ?>
 		</div>

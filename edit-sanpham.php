@@ -1,101 +1,81 @@
 <?php
     require("lib.php");
-    if (!isset($_COOKIE['userid']) && !isset($_COOKIE['password'])) die("Bạn chưa đăng nhập. <a href='login.php'>Đăng nhập</a>");
-    if(isset($_POST['submit'])) {
-        if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) {
-            // kiểm tra tên sản phẩm, loại sản phẩm, nhà sản xuất, mã sản phẩm
-            if(isset($_POST['name']) && isset($_POST['category']) && isset($_POST['code'])) {
-                // Kiểm tra giá sản phẩm
-                if(isset($_POST['price'])) {
-                    if(check_special($_POST['price'])) die_custom("Giá không được chứa kí tự đặc biệt");
-                    $giasp=(int)$_POST['price'];
-                }
-                // Kiểm tra avatar sản phẩm
-                if(isset($_FILES['image'])) {
-                    if($_FILES['image']['error']>0) die_custom("Lỗi upload file");
-                    if(check_special($_FILES['image']['name'])) die_custom("Tên avatar không được chứa kí tự đặc biệt");
-                    $avatar_path = "./image/".(string)md5($_FILES['image']['tmp_name']).(string)time();
-                    move_uploaded_file($_FILES['image']['tmp_name'], $avatar_path) or die_custom("Lỗi chuyển file server");
-                }
-                else $avatar_path = "image/notfound.jpg";
-                // Kiểm tra kí tự đặc biệt
-                if(check_special($_POST['name'])) die_custom("Tên sản phẩm không được chứa kí tự đặc biệt");
-                if(check_special($_POST['category'])) die_custom("Loại sản phẩm không được chứa kí tự đặc biệt");
-                if(check_special($_POST['code'])) die_custom("Mã sản phẩm không được chứa kí tự đặc biệt");
-                // Kiểm tra trống
-                if(strlen($_POST['name'])==0||strlen($_POST['category'])==0||strlen($_POST['code'])==0) die_custom("Các trường đánh dấu * là bắt buộc.");
-                // Tiến hành nhập sản phẩm
-                $sql_query = "UPDATE `product` SET `code` = '".$_POST['code']."', `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `price` = '".$giasp."', `image` = '".$avatar_path."', `comment` = '".$_POST['comment']."' WHERE `id` = ".$_POST['id']."";
-                mysqli_query($db_connect, $sql_query) or die_custom("Lỗi khi cập nhật sản phẩm");
-                die_custom("Cập nhật sản phẩm thành công", "./quanli-sanpham.php");
-            }
+    checkDangNhap();
+    if(isset($_POST['submit'])) addContent("product", "edit");
+?>
+<?php contentTop("Sửa sản phẩm"); ?>
+<?php
+    if(isset($_GET['id'])) {
+        $san_pham = lay_san_pham("id", $_GET['id']);
+        if(sizeof($san_pham)==0) {
+            die_custom("Sản phẩm sai", "./quanli-sanpham.php");
         }
-        else die("tài khoản không đúng");
+    }
+    else {
+        die_custom("Không có sản phẩm", "./quanli-sanpham.php");
     }
 ?>
-<!DOCTYPE html>
-<html>
-    <?php head("Sửa sản phẩm"); ?>
-    <body>
-		<div id="container" class="container-fluid p-0 m-0">
-			<?php nav(); ?>
-            <?php
-                if(isset($_GET['id'])) {
-                    $san_pham = lay_san_pham("id", $_GET['id']);
-                    if(sizeof($san_pham)==0) {
-                        die_custom("Sản phẩm sai", "./quanli-sanpham.php");
-                    }
-                }
-                else {
-                    die_custom("Không có sản phẩm", "./quanli-sanpham.php");
-                }
-            ?>
-                <div class="row">
-                    <div class="col-md-6 mx-auto">
-                        <h2>SỬA SẢN PHẨM</h2><br/>
-                        <form method="POST" action="" role="form" enctype="multipart/form-data">
-                            <div class="form-group row">
-                                <label for="name" class="col-form-label col-md-3">Tên sản phẩm*</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="name" value="<?php echo $san_pham[0]['name']; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="price" class="col-form-label col-md-3">Giá sản phẩm</label>
-                                <div class="col-md-9">
-                                    <input type="number" class="form-control" name="price" value="<?php echo $san_pham[0]['price']; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="category" class="col-form-label col-md-3">Loại sản phẩm*</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="category" value="<?php echo $san_pham[0]['category']; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="code" class="col-form-label col-md-3">Mã sản phẩm*</label>
-                                <div class="col-md-9">
-                                    <input type="text" class="form-control" name="code" value="<?php echo $san_pham[0]['code']; ?>">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="comment" class="col-form-label col-md-3">Mô tả sản phẩm</label>
-                                <div class="col-md-9">
-                                    <textarea rows=10 type="text" class="form-control" name="comment" value="<?php echo $san_pham[0]['comment']; ?>"></textarea>
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="image" class="col-form-label col-md-3">Hình ảnh*</label>
-                                <div class="col-md-9">
-                                    <input type="file" class="form-control-file" name="image">
-                                </div>
-                            </div>
-                            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
-                            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
-                        </form>
-                    </div>
+<link rel="stylesheet" href="/lib/sceditor-2.1.3/minified/themes/default.min.css" id="theme-style" />
+<script src="/lib/sceditor-2.1.3/minified/sceditor.min.js"></script>
+<script src="/lib/sceditor-2.1.3/minified/icons/monocons.js"></script>
+<script src="/lib/sceditor-2.1.3/minified/formats/bbcode.js"></script>
+<div class="row container mx-auto">
+    <div class="col-md-12">
+        <h2>SỬA SẢN PHẨM</h2><br/>
+        <form method="POST" action="" role="form" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label for="name" class="col-form-label col-md-3">Tên sản phẩm*</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="name" value="<?php echo $san_pham[0]['name']; ?>">
                 </div>
             </div>
-        </div>
-    </body>
-</html>
+            <div class="form-group row">
+                <label for="price" class="col-form-label col-md-3">Giá sản phẩm</label>
+                <div class="col-md-9">
+                    <input type="number" class="form-control" name="price" value="<?php echo preg_replace('/[^0-9.]+/', '', $san_pham[0]['price']); ?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="category" class="col-form-label col-md-3">Loại sản phẩm*</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="category" value="<?php echo $san_pham[0]['category']; ?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="code" class="col-form-label col-md-3">Mã sản phẩm*</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" name="code" value="<?php echo $san_pham[0]['code']; ?>">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="comment" class="col-form-label col-md-3">Mô tả sản phẩm</label>
+                <div class="col-md-9">
+                    <textarea rows=10 type="text" class="form-control" name="comment"><?php echo $san_pham[0]['comment']; ?></textarea>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="image" class="col-form-label col-md-3">Hình ảnh</label>
+                <div class="col-md-9">
+                    <input type="file" class="form-control-file" name="image">
+                </div>
+            </div>
+            <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
+            <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<script type="text/javascript">
+    var textarea = document.getElementsByName('comment')[0];
+    sceditor.create(textarea, {
+        format: 'xhtml',
+        icons: 'monocons',
+        style: '/lib/sceditor-2.1.3/minified/themes/content/default.min.css',
+        height: "500px",
+        width: "100%",
+        autofocus: "true",
+        autoUpdate: "true",
+        emoticonsCompat: "true",
+        emoticonsRoot: "/lib/sceditor-2.1.3/"
+    });
+</script>
+<?php contentBottom(false); ?>

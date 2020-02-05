@@ -35,36 +35,29 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 }
 mysqli_close($db_connect);
 ?>
-
-<!DOCTYPE html>
-<html>
-<?php head("Đăng nhập"); ?>
-<body>
-    <?php nav(false); ?>
-    <div class="content">
-        <div id="content" class="container p-0 mt-5 mb-5">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <h2>ĐĂNG NHẬP</h2><br/>
-                    <form method="POST" action="login.php" role="form" enctype="multipart/form-data">
-                        <div class="form-group row">
-                            <label for="username" class="col-form-label col-md-3">Username</label>
-                            <div class="col-md-9">
-                                <input type="text" class="form-control" id="username" name="username">
-                            </div>
+<?php contentTop("Đăng nhập"); ?>
+<div class="content">
+    <div id="content" class="container p-0 mt-5 mb-5">
+        <div class="row">
+            <div class="col-md-6 mx-auto">
+                <h2>ĐĂNG NHẬP</h2><br/>
+                <form method="POST" action="login.php" role="form" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="username" class="col-form-label col-md-3">Username</label>
+                        <div class="col-md-9">
+                            <input type="text" class="form-control" id="username" name="username">
                         </div>
-                        <div class="form-group row">
-                            <label for="password" class="col-form-label col-md-3">Password</label>
-                            <div class="col-md-9">
-                                <input type="password" class="form-control" name="password">
-                            </div>
-                        </div><br/>
-                        <button type="submit" class="btn btn-success" name="submit">Đăng nhập</button>
-                    </form>
-                </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="password" class="col-form-label col-md-3">Password</label>
+                        <div class="col-md-9">
+                            <input type="password" class="form-control" name="password">
+                        </div>
+                    </div><br/>
+                    <button type="submit" class="btn btn-success" name="submit">Đăng nhập</button>
+                </form>
             </div>
         </div>
     </div>
-    <?php foot(); ?>
-</body>
-</html>
+</div>
+<?php contentBottom(false); ?>
