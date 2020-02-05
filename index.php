@@ -12,25 +12,25 @@
                 <iframe id="iframe-content" src="https://albumizr.com/a/9k88" scrolling="no" frameborder="0" allowfullscreen width="100%" height="0"></iframe>
             </section>
             </center>
+			<div class="container mx-auto">
+					<!-- Sản phẩm -->
+					<section id="sanpham" class="data-section">
+						<h2><a href="#sanpham">Sản phẩm</a></h2>
+						<div id="sanpham-content" class="row"></div>
+					</section>
 
-            <!-- Sản phẩm -->
-            <section id="sanpham" class="data-section">
-                <h2><a href="#sanpham">Sản phẩm</a></h2>
-                <div id="sanpham-content" class="row"></div>
-            </section>
+					<!-- Đào tạo -->
+					<section id="daotao" class="data-section">
+						<h2><a href="#daotao">Đào tạo</a></h2>
+						<div id="daotao-content" class="row"></div>
+					</section>
 
-            <!-- Đào tạo -->
-            <section id="daotao" class="data-section">
-                <h2><a href="#daotao">Đào tạo</a></h2>
-                <div id="daotao-content" class="row"></div>
-            </section>
-
-            <!-- Dịch vụ chính -->
-            <section id="dichvuchinh" class="data-section">
-                <h2><a href="#dichvuchinh">Dịch vụ chính</a></h2>
-                <div id="dichvuchinh-content" class="row"></div>
-            </section>
-			<?php foot(); ?>
+					<!-- Dịch vụ chính -->
+					<section id="dichvuchinh" class="data-section">
+						<h2><a href="#dichvuchinh">Dịch vụ chính</a></h2>
+						<div id="dichvuchinh-content" class="row"></div>
+					</section>
+			</div>
 			<script>
 				// Sản phẩm
 				function appendSanPham() {
@@ -82,33 +82,8 @@
 					}
 				}
 				appendDichVuChinh();
-
-				var iframeContent = document.getElementById("iframe-content");
-				var mapContent = document.getElementById("map-content");
-				var iSanPham = document.querySelectorAll("#sanpham-content .iSanPham");
-				var iDaoTao = document.querySelectorAll("#daotao-content .iDaoTao");
-				var iDichVuChinh = document.querySelectorAll("#dichvuchinh-content .col-md-4");
-				// Window onresize event
-				window.addEventListener("resize", responsiveWidth);
-				// Set height to responsive elements
-				function responsiveWidth() {
-					mapContent.height = mapContent.offsetWidth;
-					iframeContent.height = iframeContent.offsetWidth*0.25;
-					for(var i=0; i<iSanPham.length; i++)
-						iSanPham[i].style.cssText += "; height: "+iSanPham[i].offsetWidth*0.5+"px;";
-					for(var i=0; i<iDaoTao.length; i++)
-						iDaoTao[i].style.cssText += "; height: "+iDaoTao[i].offsetWidth*0.5+"px;";
-					for(var i=0; i<iDichVuChinh.length; i++)
-						iDichVuChinh[i].style.cssText += "; height: "+iDichVuChinh[i].offsetWidth*0.5+"px;";
-				}
-				responsiveWidth();
-
-				// Custom CSS
-				var iTrungTam = document.getElementsByClassName("trungtam");
-				for(var i=0; i<iTrungTam.length; i++) {
-					iTrungTam[i].style.top = (iTrungTam[i].parentElement.offsetHeight-iTrungTam[i].offsetHeight)*0.5;
-				}
 			</script>
+			<?php foot(); ?>
 		</div>
 	</body>
 </html>

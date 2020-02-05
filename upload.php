@@ -39,6 +39,11 @@
     <body>
 		<div id="container" class="container-fluid p-0 m-0">
 			<?php nav(); ?>
+            <?php
+                if(isset($_GET['id'])) {
+                    $san_pham = lay_san_pham("id", $_GET['id']);
+                }
+            ?>
                 <div class="row">
                     <div class="col-md-6 mx-auto">
                         <h2>UPLOAD SẢN PHẨM</h2><br/>

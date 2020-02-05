@@ -27,19 +27,19 @@
         }
         return $array_sp;
     }
-    function lay_thong_tin_user(string $query_key="", string $query_data="") {
+    function lay_bai_viet(string $query_key="", string $query_data="") {
         if($query_key == "") {
-            $db_query = "SELECT * FROM `user`";
+            $db_query = "SELECT * FROM `post`";
         }
         else {
-            $db_query = "SELECT * FROM `user` WHERE `".$query_key."`='".$query_data."'";
+            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".$query_data."'";
         }
-        $db_user = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin user");
-        $array_user = [];
-        while($user = mysqli_fetch_assoc($db_user)) {
-            $array_user[] = $user;
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
+        $array_sp = [];
+        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
+            $array_sp[] = $sanpham;
         }
-        return $array_user;
+        return $array_sp;
     }
     function kt_level(string $iduser, string $password="") {
         if(check_special($iduser)||check_special($password)) die_custom("Cookie không được chứa kí tự đặc biệt.", "./");
@@ -201,6 +201,8 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./upload.php">ĐĂNG SẢN PHẨM</a>
                                 <a class="dropdown-item" href="./uploadpost.php">ĐĂNG BÀI VIẾT</a>
+                                <a class="dropdown-item" href="./quanli-sanpham.php">QUẢN LÍ SẢN PHẨM</a>
+                                <a class="dropdown-item" href="./quanli-baiviet.php">QUẢN LÍ BÀI VIẾT</a>
                                 <a class="dropdown-item" href="./login.php?logout">ĐĂNG XUẤT</a>
                             </div>
                         </li>
@@ -241,8 +243,8 @@
             <div class="col-md-4">
                 <h5>Social</h5>
                 <p>
-                    <a href="https://www.facebook.com/hayho.life"><i class="fa fa-facebook"></i></a>
-                    <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0"><i class="fa fa-youtube"></i></a>
+                    <a href="https://www.facebook.com/hayho.life"><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
+                    <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
                 </p>
             </div>
             <div class="col-md-4">
@@ -264,15 +266,31 @@
                     mainMenu.classList.remove("fixed-top");
                 }
             }
+            var iframeContent = document.getElementById("iframe-content");
             var mapContent = document.getElementById("map-content");
+            var iSanPham = document.querySelectorAll("#sanpham-content .iSanPham");
+            var iDaoTao = document.querySelectorAll("#daotao-content .iDaoTao");
+            var iDichVuChinh = document.querySelectorAll("#dichvuchinh-content .col-md-4");
+            var iTinTuc = document.querySelectorAll("#tintuc .col-md-4");
             // Window onresize event
             window.addEventListener("resize", responsiveWidth);
             // Set height to responsive elements
             function responsiveWidth() {
-                mapContent.height = mapContent.offsetWidth;
+                if(mapContent!=null)
+                    mapContent.height = mapContent.offsetWidth;
+                if(iframeContent!=null)
+                    iframeContent.height = iframeContent.offsetWidth*.25;
+                for(var i=0; i<iSanPham.length; i++)
+                    iSanPham[i].style.cssText += "; height: "+iSanPham[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iDaoTao.length; i++)
+                    iDaoTao[i].style.cssText += "; height: "+iDaoTao[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iDichVuChinh.length; i++)
+                    iDichVuChinh[i].style.cssText += "; height: "+iDichVuChinh[i].offsetWidth*0.5+"px;";
+                for(var i=0; i<iTinTuc.length; i++)
+                    iTinTuc[i].style.cssText += "; height: "+iTinTuc[i].offsetWidth*0.5+"px;";
             }
             responsiveWidth();
-
+            
             // Custom CSS
             var iTrungTam = document.getElementsByClassName("trungtam");
             for(var i=0; i<iTrungTam.length; i++) {

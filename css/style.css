@@ -5,7 +5,6 @@
     display: inline-block;
     width: 100%;
 }
-
 /* Header */
 header {
     /* height: 500px;
@@ -111,6 +110,11 @@ footer .fa {
     font-size: 50px;
     padding-right: 10px;
     color: gray;
+    -webkit-transition: all 300ms ease-in-out;
+    -moz-transition: all 300ms ease-in-out;
+    -ms-transition: all 300ms ease-in-out;
+    -o-transition: all 300ms ease-in-out;
+    transition: all 300ms ease-in-out;
 }
 footer h5 {
     margin-bottom: 15px;
