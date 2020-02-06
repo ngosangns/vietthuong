@@ -21,7 +21,7 @@
             $db_query = "SELECT * FROM `product`"." ORDER BY `id` DESC";
         }
         else {
-            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".$query_data."'"." ORDER BY `id` DESC";
+            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".addslashes($query_data)."'"." ORDER BY `id` DESC";
         }
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
@@ -36,7 +36,7 @@
             $db_query = "SELECT * FROM `post`"." ORDER BY `id` DESC";
         }
         else {
-            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".$query_data."'"." ORDER BY `id` DESC";
+            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".addslashes($query_data)."'"." ORDER BY `id` DESC";
         }
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
@@ -47,8 +47,8 @@
     }
     function kt_level(string $iduser, string $password="") {
         if(check_special($iduser)||check_special($password)) die_custom("Cookie không được chứa kí tự đặc biệt.", "./");
-        if($password=="") $sql_query = "SELECT `username` FROM `user` WHERE `id`='".$iduser."'";
-        else $sql_query = "SELECT `username` FROM `user` WHERE `id`='".$iduser."' AND `password`='".$password."'";
+        if($password=="") $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."'";
+        else $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."' AND `password`='".addslashes($password)."'";
         $result = mysqli_query($GLOBALS['db_connect'], $sql_query);
         $result = mysqli_fetch_assoc($result);
         if(isset($result['username'])) return 1;
@@ -57,8 +57,8 @@
     function search(string $search_query, string $layout = "product", string $excludee = "") {
         if(check_special($search_query)) die_custom("Query không được chứa kí tự đặc biệt.", "./");
         $excludee_query = "";
-        if($excludee != "") $excludee_query = " AND NOT `id` = ".$excludee;
-        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".$search_query."%' OR `category` LIKE '%".$search_query."%')".$excludee_query." ORDER BY `id` DESC";
+        if($excludee != "") $excludee_query = " AND NOT `id` = ".addslashes($excludee);
+        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".addslashes($search_query)."%' OR `category` LIKE '%".addslashes($search_query)."%')".addslashes($excludee_query)." ORDER BY `id` DESC";
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $sql_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
         while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
@@ -311,7 +311,7 @@
         // Kiểm tra id
         $id = ""; if(isset($_POST['id'])) $id = $_POST['id'];
         // Kiểm tra avatar
-        $db_sanpham = mysqli_query($GLOBALS['db_connect'], "SELECT `image` FROM `".$layout."` WHERE `id` = '".$id."'") or die_custom("Có lỗi khi cập nhật sản phẩm");
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], "SELECT `image` FROM `".$layout."` WHERE `id` = '".addslashes($id)."'") or die_custom("Có lỗi khi cập nhật sản phẩm");
         $sanpham = mysqli_fetch_assoc($db_sanpham);
         $avtNotFound = "./img/notfound.png";
         if($sanpham!=null && sizeof($sanpham)>0) {
@@ -331,8 +331,8 @@
             // Kiểm tra description
             $descr = ""; if(isset($_POST['descr'])) $descr = $_POST['descr'];
             // Nhập/Update bài viết
-            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `image` = '".$avatar_path."', `descr` = '".$descr."', `comment` = '".$comment."' WHERE `id` = ".$id;
-            else $sql_query = "INSERT INTO `post`(`name`, `category`, `image`, `descr`, `comment`) VALUES('".$_POST['name']."', '".$_POST['category']."', '".$avatar_path."', '".$descr."', '".$comment."')";
+            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".addslashes($_POST['name'])."', `category` = '".addslashes($_POST['category'])."', `image` = '".addslashes($avatar_path)."', `descr` = '".addslashes($descr)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
+            else $sql_query = "INSERT INTO `post`(`name`, `category`, `image`, `descr`, `comment`) VALUES('".addslashes($_POST['name'])."', '".addslashes($_POST['category'])."', '".addslashes($avatar_path)."', '".addslashes($descr)."', '".addslashes($comment)."')";
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật bài viết");
             die_custom("Cập nhật bài viết thành công", "./quanli-baiviet.php");
         }
@@ -343,8 +343,8 @@
             // Kiểm tra giá sản phẩm
             if(isset($_POST['price'])) $giasp=(int)$_POST['price'];
             // Nhập/Update sản phẩm
-            if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".$_POST['code']."', `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `price` = '".$giasp."', `image` = '".$avatar_path."', `comment` = '".$comment."' WHERE `id` = ".$id;
-            else $sql_query = "INSERT INTO `product`(`code`, `name`, `category`, `price`, `image`, `comment`) VALUES('".$_POST['code']."', '".$_POST['name']."', '".$_POST['category']."', ".$giasp.", '".$avatar_path."', '".$comment."')";
+            if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".addslashes($_POST['code'])."', `name` = '".addslashes($_POST['name'])."', `category` = '".addslashes($_POST['category'])."', `price` = '".addslashes($giasp)."', `image` = '".addslashes($avatar_path)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
+            else $sql_query = "INSERT INTO `product`(`code`, `name`, `category`, `price`, `image`, `comment`) VALUES('".addslashes($_POST['code'])."', '".addslashes($_POST['name'])."', '".addslashes($_POST['category'])."', ".addslashes($giasp).", '".addslashes($avatar_path)."', '".addslashes($comment)."')";
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật sản phẩm");
             die_custom("Cập nhật sản phẩm thành công", "./quanli-sanpham.php");
         }

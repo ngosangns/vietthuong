@@ -1,6 +1,6 @@
 <?php
 	// connect database
-	$db_host = "103.254.15.140";
+	$db_host = "localhost";
 	$db_user = "kshinedo_logka";
 	$db_pass = "jikmli";
 	$db_connect = mysqli_connect($db_host, $db_user, $db_pass) or die ("error connect");
