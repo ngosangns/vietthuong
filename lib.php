@@ -160,14 +160,14 @@
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./search.php?search=Piano">ĐÀN PIANO</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">- GRAND PIANO</a>
-                                <a class="dropdown-item" href="#">- UPRIGHT PIANO</a>
-                                <a class="dropdown-item" href="#">- DIGITAL PIANO</a>
+                                <a class="dropdown-item" href="./search.php?search=Grand Piano">- GRAND PIANO</a>
+                                <a class="dropdown-item" href="./search.php?search=Upright Piano">- UPRIGHT PIANO</a>
+                                <a class="dropdown-item" href="./search.php?search=Digital Piano">- DIGITAL PIANO</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">ĐÀN GUITAR</a>
-                                <a class="dropdown-item" href="#">ĐÀN ORGAN</a>
-                                <a class="dropdown-item" href="#">ĐÀN UKULELE</a>
-                                <a class="dropdown-item" href="#">ĐÀN VIOLIN</a>
+                                <a class="dropdown-item" href="./search.php?search=Guitar">ĐÀN GUITAR</a>
+                                <a class="dropdown-item" href="./search.php?search=Organ">ĐÀN ORGAN</a>
+                                <a class="dropdown-item" href="./search.php?search=Ukulele">ĐÀN UKULELE</a>
+                                <a class="dropdown-item" href="./search.php?search=Violin">ĐÀN VIOLIN</a>
                             </div>
                         </li>
                         <li class="nav-item">
