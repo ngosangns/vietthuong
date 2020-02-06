@@ -158,7 +158,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#sanpham" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SẢN PHẨM</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="#">ĐÀN PIANO</a>
+                                <a class="dropdown-item" href="./search.php?search=Piano">ĐÀN PIANO</a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="#">- GRAND PIANO</a>
                                 <a class="dropdown-item" href="#">- UPRIGHT PIANO</a>
