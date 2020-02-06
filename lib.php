@@ -18,10 +18,10 @@
     // lay san pham tu mySQL
     function lay_san_pham(string $query_key="", string $query_data="") {
         if($query_key == "") {
-            $db_query = "SELECT * FROM `product`";
+            $db_query = "SELECT * FROM `product`"." ORDER BY `id` DESC";
         }
         else {
-            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".$query_data."'";
+            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".$query_data."'"." ORDER BY `id` DESC";
         }
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
@@ -33,10 +33,10 @@
     }
     function lay_bai_viet(string $query_key="", string $query_data="") {
         if($query_key == "") {
-            $db_query = "SELECT * FROM `post`";
+            $db_query = "SELECT * FROM `post`"." ORDER BY `id` DESC";
         }
         else {
-            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".$query_data."'";
+            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".$query_data."'"." ORDER BY `id` DESC";
         }
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
@@ -58,7 +58,7 @@
         if(check_special($search_query)) die_custom("Query không được chứa kí tự đặc biệt.", "./");
         $excludee_query = "";
         if($excludee != "") $excludee_query = " AND NOT `id` = ".$excludee;
-        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".$search_query."%' OR `category` LIKE '%".$search_query."%')".$excludee_query;
+        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".$search_query."%' OR `category` LIKE '%".$search_query."%')".$excludee_query." ORDER BY `id` DESC";
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $sql_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
         while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
@@ -135,24 +135,24 @@
                             <a class="nav-link" href="/">HOME</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#">GIỚI THIỆU</a>
+                            <a class="nav-link" href="./baiviet.php?id=15">GIỚI THIỆU</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="tintuc.php">TIN TỨC-SỰ KIỆN</a>
+                            <a class="nav-link" href="./tintuc.php">TIN TỨC-SỰ KIỆN</a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#daotao" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ĐÀO TẠO</a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./#daotao">KHÓA HỌC:</a>
+                                <a class="dropdown-item" href="./#daotao">KHÓA HỌC</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC PIANO</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC GUITAR</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC UKULELE</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC VIOLIN</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC ORGAN</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC THANH NHẠC</a>
-                                <a class="dropdown-item" href="#">- KHÓA HỌC ABRSM</a>
-                                <a class="dropdown-item" href="#">- ĐÀO TẠO NHẠC CÔNG</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=6">- KHÓA HỌC PIANO</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=10">- KHÓA HỌC GUITAR</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=13">- KHÓA HỌC UKULELE</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=14">- KHÓA HỌC VIOLIN</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=11">- KHÓA HỌC ORGAN</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=12">- KHÓA HỌC THANH NHẠC</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=9">- KHÓA HỌC ABRSM</a>
+                                <a class="dropdown-item" href="./baiviet.php?id=2">- ĐÀO TẠO NHẠC CÔNG</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -215,10 +215,10 @@
         ?>
 		<footer class="row bg-dark text-white mt-5">
             <div class="col-md-4">
-                <h5>Công ty ABC</h5>
+                <h5>Công ty ROSE 9</h5>
                 <p>
                     Số điện thoại: <b>+1234567890</b><br/>
-                    Địa chỉ: <b>Bình Tân, Tp. Hồ Chí Minh</b><br/>
+                    Địa chỉ: <b>188/1 Nguyễn Văn Hưởng, Thảo Điền, Quận 2, Hồ Chí Minh</b><br/>
                 </p>
             </div>
             <div class="col-md-4">
@@ -230,7 +230,7 @@
             </div>
             <div class="col-md-4">
                 <h5>Map</h5>
-                <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.1355207326615!2d106.65516191417197!3d10.800930961695874!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529373fd49db9%3A0xdb6fc80aa6c3239c!2zMTdhIEPhu5luZyBIw7JhLCBQaMaw4budbmcgNCwgVMOibiBCw6xuaCwgSOG7kyBDaMOtIE1pbmgsIFZp4buHdCBOYW0!5e0!3m2!1svi!2s!4v1580820177526!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
             </div>
         </footer>
         <script>
@@ -295,8 +295,12 @@
         <?php
     }
     function checkDangNhap() {
-        if(!isset($_COOKIE['userid']) && !isset($_COOKIE['password'])) die_custom("Bạn chưa đăng nhập", "./login.php");
+        if(!isset($_COOKIE['userid']) || !isset($_COOKIE['password'])) die_custom("Bạn chưa đăng nhập", "./login.php");
         if(kt_level($_COOKIE['userid'], $_COOKIE['password'])==0) die_custom("Tài khoản sai", "./login.php?logout");
+    }
+    function displayforLogged() {
+        if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) return true;
+        return false;
     }
     function addContent(string $layout, string $action) {
         // Kiểm tra name/category
@@ -327,9 +331,9 @@
             // Kiểm tra description
             $descr = ""; if(isset($_POST['descr'])) $descr = $_POST['descr'];
             // Nhập/Update bài viết
-            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `image` = '".$avatar_path."', `descr` = '".$descr."', `comment` = '".$comment."' WHERE `id` = ".$id."";
+            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `image` = '".$avatar_path."', `descr` = '".$descr."', `comment` = '".$comment."' WHERE `id` = ".$id;
             else $sql_query = "INSERT INTO `post`(`name`, `category`, `image`, `descr`, `comment`) VALUES('".$_POST['name']."', '".$_POST['category']."', '".$avatar_path."', '".$descr."', '".$comment."')";
-            mysqli_query($GLOBALS['db_connect'], $sql_query) or die("Lỗi khi cập nhật bài viết");
+            mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật bài viết");
             die_custom("Cập nhật bài viết thành công", "./quanli-baiviet.php");
         }
         if($layout == "product") {
@@ -339,7 +343,7 @@
             // Kiểm tra giá sản phẩm
             if(isset($_POST['price'])) $giasp=(int)$_POST['price'];
             // Nhập/Update sản phẩm
-            if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".$_POST['code']."', `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `price` = '".$giasp."', `image` = '".$avatar_path."', `comment` = '".$comment."' WHERE `id` = ".$id."";
+            if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".$_POST['code']."', `name` = '".$_POST['name']."', `category` = '".$_POST['category']."', `price` = '".$giasp."', `image` = '".$avatar_path."', `comment` = '".$comment."' WHERE `id` = ".$id;
             else $sql_query = "INSERT INTO `product`(`code`, `name`, `category`, `price`, `image`, `comment`) VALUES('".$_POST['code']."', '".$_POST['name']."', '".$_POST['category']."', ".$giasp.", '".$avatar_path."', '".$comment."')";
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật sản phẩm");
             die_custom("Cập nhật sản phẩm thành công", "./quanli-sanpham.php");

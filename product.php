@@ -14,8 +14,8 @@
 				<img src="<?php echo $datasp[0]['image']; ?>" width=100%>
 			</div>
 			<div class="col-md-6">
-				<h2><?php echo $datasp[0]['name']; ?></h2>
-				<h6 class="text-muted">Giá: <?php echo $datasp[0]['price']; ?></h6>
+				<h2><?php echo $datasp[0]['name']; ?><?php if(displayforLogged()) echo "<small><a class='text-muted ml-2 text-decoration-none' style='font-size: 14px' href='./edit-sanpham.php?id=".$_GET['id']."'>Sửa sản phẩm</a></small>"; ?></h2>
+				<h6 class="text-danger">Giá: <?php echo $datasp[0]['price']; ?></h6>
 				<h6 class="text-muted">Loại: <?php echo $datasp[0]['category']; ?></h6>
 				<h6 class="text-muted">Mã sản phẩm: <?php echo $datasp[0]['code']; ?></h6>
 				<span class="text-muted">MÔ TẢ SẢN PHẨM:</span><br/>

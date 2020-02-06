@@ -10,7 +10,7 @@ if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) {
         unset($_COOKIE['password']);
         die_custom("Đăng xuất thành công.", "./");
     }
-    die_custom("Bạn đã đăng nhập.", "./upload.php");
+    die_custom("Bạn đã đăng nhập.", "./upload-sanpham.php");
 }
 // lấy dữ liệu ở form
 if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -31,7 +31,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     // tạo cookie nếu đã kiểm tra xong
     setcookie('userid', $user_array[0]['id'], time() + 60*60*24*30, "/");
     setcookie('password',$user_array[0]['password'], time() + 60*60*24*30, "/");
-    die_custom("Đăng nhập thành công.", "./upload.php");
+    die_custom("Đăng nhập thành công.", "./upload-sanpham.php");
 }
 mysqli_close($db_connect);
 ?>
