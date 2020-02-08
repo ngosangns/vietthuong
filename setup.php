@@ -19,11 +19,7 @@
 	mysqli_query($db_connect, $db_query) or die("create table error : product");
 	//tạo bảng bài viết
 	$db_table_3 = "post";
-<<<<<<< HEAD
 	$db_query= "CREATE TABLE IF NOT EXISTS ".$db_table_3."(id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, dangdienra TINYINT(1) NOT NULL DEFAULT 0, displaytt TINYINT(1) NOT NULL DEFAULT 1, descr mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, comment longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, category VARCHAR(255) NOT NULL, image VARCHAR(255) DEFAULT 'image/notfound.jpg') ENGINE = InnoDB;";
-=======
-	$db_query= "CREATE TABLE IF NOT EXISTS ".$db_table_3."(id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, name VARCHAR(255) NOT NULL, descr mediumtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, comment longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci, category VARCHAR(255) NOT NULL, image VARCHAR(255) DEFAULT 'image/notfound.jpg') ENGINE = InnoDB;";
->>>>>>> f0a8d7431e8a1b412b28dd1a223db265fe0bbc6f
 	mysqli_query($db_connect, $db_query) or die("create table error : post");
 	// tạo tk admin: tk admin mk admin
 	$db_query = "INSERT INTO `user`(`username`, `password`)

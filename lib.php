@@ -33,17 +33,10 @@
     }
     function lay_bai_viet(string $query_key="", string $query_data="", bool $onlyhot = false) {
         if($query_key == "") {
-<<<<<<< HEAD
             $db_query = "SELECT * FROM `post`"." WHERE `displaytt` = 1".($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
         }
         else {
             $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".addslashes($query_data)."'"." AND `displaytt` = 1".($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
-=======
-            $db_query = "SELECT * FROM `post`"." ORDER BY `id` DESC";
-        }
-        else {
-            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".addslashes($query_data)."'"." ORDER BY `id` DESC";
->>>>>>> f0a8d7431e8a1b412b28dd1a223db265fe0bbc6f
         }
         $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
         $array_sp = [];
@@ -228,7 +221,6 @@
     }
     function foot() { // chan trang web
         ?>
-<<<<<<< HEAD
 		<footer class="bg-dark text-white mt-5">
 		    <div class="row p-4">
     		    <div class="col-md-4">
@@ -259,27 +251,6 @@
                     <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
                 </div>
 		    </div>
-=======
-		<footer class="row bg-dark text-white mt-5">
-            <div class="col-md-4">
-                <h5>Công ty ROSE 9</h5>
-                <p>
-                    Số điện thoại: <b>+1234567890</b><br/>
-                    Địa chỉ: <b>188/1 Nguyễn Văn Hưởng, Thảo Điền, Quận 2, Hồ Chí Minh</b><br/>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h5>Social</h5>
-                <p>
-                    <a href="https://www.facebook.com/hayho.life"><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
-                    <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
-                </p>
-            </div>
-            <div class="col-md-4">
-                <h5>Map</h5>
-                <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-            </div>
->>>>>>> f0a8d7431e8a1b412b28dd1a223db265fe0bbc6f
         </footer>
         <script>
             // Fixed menu on scroll
@@ -407,13 +378,8 @@
             // Kiểm tra description
             $descr = ""; if(isset($_POST['descr'])) $descr = $_POST['descr'];
             // Nhập/Update bài viết
-<<<<<<< HEAD
             if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".addslashes($_POST['name'])."', `dangdienra` = ".$dangdienra.", `displaytt` = '".$displaytt."', `category` = '".addslashes($_POST['category'])."', `image` = '".addslashes($avatar_path)."', `descr` = '".addslashes($descr)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
             else $sql_query = "INSERT INTO `post`(`name`, `displaytt`, `dangdienra`, `category`, `image`, `descr`, `comment`) VALUES('".addslashes($_POST['name'])."', ".$displaytt.", ".$dangdienra.", '".addslashes($_POST['category'])."', '".addslashes($avatar_path)."', '".addslashes($descr)."', '".addslashes($comment)."')";
-=======
-            if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".addslashes($_POST['name'])."', `category` = '".addslashes($_POST['category'])."', `image` = '".addslashes($avatar_path)."', `descr` = '".addslashes($descr)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
-            else $sql_query = "INSERT INTO `post`(`name`, `category`, `image`, `descr`, `comment`) VALUES('".addslashes($_POST['name'])."', '".addslashes($_POST['category'])."', '".addslashes($avatar_path)."', '".addslashes($descr)."', '".addslashes($comment)."')";
->>>>>>> f0a8d7431e8a1b412b28dd1a223db265fe0bbc6f
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật bài viết");
             die_custom("Cập nhật bài viết thành công", "./quanli-baiviet.php");
         }
