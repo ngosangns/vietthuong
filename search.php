@@ -2,10 +2,6 @@
     require("lib.php");
 ?>
 <?php contentTop("Tìm sản phẩm"); ?>
-<div class="content">
-<!-- products -->
-<div id="content" class="container p-0 mt-5 mb-5">
-   <div class="container">
       <div class="row">
          <div class="col-md-12">
             <div id="products" class="row m-0">
@@ -49,9 +45,6 @@
                ?>
             </div>
          </div>
-      </div>
-   </div>
-</div>
 <script type="text/javascript">
    var title_sanpham = document.getElementsByClassName("title_sanpham_a");
    for(var i=0; i<title_sanpham.length; i++) {

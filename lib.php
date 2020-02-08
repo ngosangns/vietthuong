@@ -297,7 +297,7 @@
         <html>
             <?php head($titleHeader); ?>
             <body>
-                <div id="container" class="container-fluid p-0 m-0">
+                <div id="container" class="container mx-auto p-0 m-0">
         <?php nav(); ?>
         <div class="mt-5"></div>
         <?php

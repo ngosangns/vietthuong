@@ -3,10 +3,7 @@
 ?>
 <!DOCTYPE html>
 <html>
-	<?php head("Home"); ?>
-	<body>
-		<div id="container" class="container mx-auto p-0 m-0">
-			<?php nav(); ?>
+	<?php contentTop("Home"); ?>
 			<center>
             <section id="iframe">
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
@@ -144,7 +141,4 @@
                 }
                 appendYoutubeVideos();
 			</script>
-			<?php foot(); ?>
-		</div>
-	</body>
-</html>
+			<?php contentBottom(); ?>
