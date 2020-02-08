@@ -39,6 +39,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="dangdienra" class="col-form-label col-md-3">Sự kiện đang diễn ra</label>
+                <div class="col-md-9">
+                    <input type="checkbox" class="form-control" value="1" name="dangdienra">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="displaytt" class="col-form-label col-md-3">Hiện trên trang tin tức</label>
+                <div class="col-md-9">
+                    <input type="checkbox" class="form-control" value="1" name="displaytt" checked>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="image" class="col-form-label col-md-3">Hình ảnh</label>
                 <div class="col-md-9">
                     <input type="file" class="form-control-file" name="image">

@@ -48,6 +48,18 @@
                 </div>
             </div>
             <div class="form-group row">
+                <label for="dangdienra" class="col-form-label col-md-3">Sự kiện đang diễn ra</label>
+                <div class="col-md-9">
+                    <input type="checkbox" class="form-control" value="1" name="dangdienra" <?php if((int)$san_pham[0]['dangdienra']) echo "checked"; ?>>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="displaytt" class="col-form-label col-md-3">Hiện trên trang tin tức</label>
+                <div class="col-md-9">
+                    <input type="checkbox" class="form-control" value="1" name="displaytt" <?php if((int)$san_pham[0]['displaytt']) echo "checked"; ?>>
+                </div>
+            </div>
+            <div class="form-group row">
                 <label for="image" class="col-form-label col-md-3">Hình ảnh</label>
                 <div class="col-md-9">
                     <input type="file" class="form-control-file" name="image">
@@ -55,6 +67,7 @@
             </div>
             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?postid=<?php echo $_GET['id']; ?>">Xóa</button>
         </form>
     </div>
 </div>

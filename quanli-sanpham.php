@@ -14,7 +14,7 @@
                     ?>
                         <tr>
                             <td><a href="./product.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></td>
-                            <td class="text-right"><a class="btn btn-success text-white" href="./edit-sanpham.php?id=<?php echo $data_product[$i]['id']; ?>">Sửa</a> <a class="btn btn-danger text-white" href="./delete.php?productid=<?php echo $data_product[$i]['id']; ?>">Xóa</a></td>
+                            <td class="text-right"><a class="btn btn-success text-white" href="./edit-sanpham.php?id=<?php echo $data_product[$i]['id']; ?>">Sửa</a> <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?productid=<?php echo $data_product[$i]['id']; ?>">Xóa</button></td>
                         <tr>
                 </div>
                     <!--end_product-->

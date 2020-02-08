@@ -57,7 +57,7 @@
    for(var i=0; i<title_sanpham.length; i++) {
       title_sanpham[i].style.cssText += "; text-decoration: none;";
       if(title_sanpham[i].innerHTML.length>30) title_sanpham[i].innerHTML = title_sanpham[i].innerHTML.slice(0, 30)+"...";
-      else title_sanpham[i].innerHTML = title_sanpham[i].innerHTML+"\xa0".repeat(30-title_sanpham[i].innerHTML.length);
+      else title_sanpham[i].innerHTML = title_sanpham[i].innerHTML+" "+"\xa0".repeat(30-title_sanpham[i].innerHTML.length);
    }
 </script>
 <!-- end products -->

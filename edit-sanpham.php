@@ -61,6 +61,7 @@
             </div>
             <input type="hidden" name="id" value="<?php echo $_GET['id']; ?>">
             <button type="submit" class="btn btn-primary" name="submit">Submit</button>
+            <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?productid=<?php echo $_GET['id']; ?>">Xóa</button>
         </form>
     </div>
 </div>
