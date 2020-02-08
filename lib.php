@@ -149,10 +149,9 @@
                             <a class="nav-link" href="./tintuc.php">TIN TỨC-SỰ KIỆN</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#daotao" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ĐÀO TẠO</a>
+                            <a class="nav-link d-inline-block" href="#daotao">ĐÀO TẠO</a>
+                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./#daotao">KHÓA HỌC</a>
-                                <div class="dropdown-divider"></div>
                                 <a class="dropdown-item" href="./baiviet.php?id=6">- KHÓA HỌC PIANO</a>
                                 <a class="dropdown-item" href="./baiviet.php?id=10">- KHÓA HỌC GUITAR</a>
                                 <a class="dropdown-item" href="./baiviet.php?id=13">- KHÓA HỌC UKULELE</a>
@@ -164,7 +163,8 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#sanpham" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">SẢN PHẨM</a>
+                            <a class="nav-link d-inline-block" href="#sanpham">SẢN PHẨM</a>
+                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./search.php?search=Piano">ĐÀN PIANO</a>
                                 <div class="dropdown-divider"></div>
@@ -186,7 +186,8 @@
                                 if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) {
                                     ?>
                         <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" href="#sanpham" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ADMIN</a>
+                            <a class="nav-link d-inline-block" href="#daotao">ADMIN</a>
+                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./upload-sanpham.php">ĐĂNG SẢN PHẨM</a>
                                 <a class="dropdown-item" href="./upload-baiviet.php">ĐĂNG BÀI VIẾT</a>
@@ -216,6 +217,12 @@
                     </ul>
                 </div>
             </nav>
+            <script>
+                // $('.dropdown-toggle').off().on("click", function(e) {
+                //     e.preventDefault();
+                //     window.location = $(this).attr('href');
+                // });
+            </script>
         </header>
         <?php
     }

@@ -5,19 +5,6 @@
     display: inline-block;
     width: 100%;
 }
-#main-menu *{
-font-size:15px!important;
-margin-right:10px;
-
-}
-#main-menu li:hover *{
-font-size:15px!important;
-margin-right:10px;
-color:#080706;
-}
-#main-menu ul li{
-	color:red;
-}
 /* Header */
 header {
     /* height: 500px;
@@ -29,11 +16,15 @@ header {
 /* Main banner */
 
 /* Navbar */
+.dropdown-toggle::after {
+	font-size: 35px;
+	vertical-align: baseline;
+}
 .dropdown:hover>.dropdown-menu {
     display: block;
 }
-.dropdown>.dropdown-toggle:active {
-    pointer-events: none;
+#main-menu li {
+	padding: 0 5px;
 }
 /* Section */
 section {
