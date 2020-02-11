@@ -49,7 +49,7 @@
                             <div class="col-sm-12 iTin mt-4" <?php echo ($i<sizeof($data_product)-1?'style="border-bottom: 1px dashed black"':'') ?>>
                                 <div class="row mb-4">
                                     <div class="col-md-4 mb-4">
-                                        <a class="d-block w-100 h-100" href="#" style="background-image:url(<?php echo $data_product[$i]['image']; ?>); background-size: cover;"></a>
+                                        <a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>" class="d-block w-100 h-100" style="background-image:url(<?php echo $data_product[$i]['image']; ?>); background-size: cover;"></a>
                                     </div>
                                     <div class="col-md-8">
                                         <h5><a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></h5>
@@ -84,7 +84,7 @@
                         <div class="col-sm-12 iTin mt-4">
                             <div class="row mb-4">
                                 <div class="col-md-4 mb-4">
-                                    <a class="d-block w-100 h-100" href="#" style="background-image:url(<?php echo $data_product[$i]['image']; ?>); background-size: cover;"></a>
+                                    <a class="d-block w-100 h-100" href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>" style="background-image:url(<?php echo $data_product[$i]['image']; ?>); background-size: cover;"></a>
                                 </div>
                                 <div class="col-md-8">
                                     <h5><a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></h5>
