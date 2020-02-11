@@ -9,28 +9,28 @@
                 <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
               <div class="carousel-inner">
                     <div class="carousel-item active">
-                      <img class="d-block w-100" src="https://2.pik.vn/2020cbd588ec-68ce-4cb2-a015-a98a053df64b.jpg">
+                      <img class="d-block w-100" src="./img/slide/s1.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/2020f8494d93-88dc-4c9f-9506-a54614a3a143.jpg">
+                      <img class="d-block w-100" src="./img/slide/s2.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/20204c2f7933-7d33-46f1-9b04-73f55a3c4ae1.jpg">
+                      <img class="d-block w-100" src="./img/slide/s3.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/2020e1df8c67-39ba-43a0-a329-c1655df140cf.jpg">
+                      <img class="d-block w-100" src="./img/slide/s4.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/20209939ebd6-58d4-48d8-96c8-60c4a7f932fa.jpg">
+                      <img class="d-block w-100" src="./img/slide/s5.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/2020ba67ed9c-078e-415e-b471-c8efb61cecc4.jpg">
+                      <img class="d-block w-100" src="./img/slide/s6.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/20201851db85-6a84-4cf2-97ec-acf3fea29723.jpg">
+                      <img class="d-block w-100" src="./img/slide/s7.jpg">
                     </div>
                     <div class="carousel-item">
-                      <img class="d-block w-100" src="https://2.pik.vn/202075553f6a-5c40-4e5c-bc1f-7e90c9706732.jpg">
+                      <img class="d-block w-100" src="./img/slide/s8.jpg">
                     </div>
               </div>
               <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
@@ -98,7 +98,7 @@
 				    }
 				</style>
 				<!-- Youtube Videos -->
-				<section id="youtubeVideos" style="background: #a07b40;" class="data-section">
+				<section id="youtubeVideos" style="background: #868686;" class="data-section">
 				    <h2><a style="border-bottom: 3px solid white!important">Video</a></h2>
 				    <div id="youtubeVideos-content" class="row"></div>
 				</section>

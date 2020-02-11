@@ -23,6 +23,14 @@ header {
 .dropdown:hover>.dropdown-menu {
     display: block;
 }
+.dropdown > .dropdown-toggle:active {
+    /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+a.dropdown-toggle {
+    padding: 5px!important;
+    border: 1px solid black;
+}
 #main-menu li {
 	padding: 0 5px;
 }

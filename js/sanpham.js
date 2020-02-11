@@ -24,19 +24,5 @@ var sanpham = [
         image : "organ.jpg",
         link : "./search.php?search=Organ",
     },
-{
-        name : "Digital Piano",
-        image : "digital.jpg",
-        link : "./search.php?search=Digital Piano",
-    },
-{
-        name : "Upright Piano",
-        image : "digital.jpg",
-        link : "./search.php?search=Upright Piano",
-    },
-{
-        name : "Grand Piano",
-        image : "digital.jpg",
-        link : "./search.php?search=Grand Piano",
-    },
+
 ]

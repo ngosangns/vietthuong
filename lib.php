@@ -149,7 +149,7 @@
                             <a class="nav-link" href="./tintuc.php">TIN TỨC-SỰ KIỆN</a>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link d-inline-block" href="#daotao">ĐÀO TẠO</a>
+                            <a class="nav-link d-inline-block" href="./#daotao">ĐÀO TẠO</a>
                             <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./baiviet.php?id=6">- KHÓA HỌC PIANO</a>
@@ -163,7 +163,7 @@
                             </div>
                         </li>
                         <li class="nav-item dropdown">
-                            <a class="nav-link d-inline-block" href="#sanpham">SẢN PHẨM</a>
+                            <a class="nav-link d-inline-block" href="./search.php">SẢN PHẨM</a>
                             <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                                 <a class="dropdown-item" href="./search.php?search=Piano">ĐÀN PIANO</a>
@@ -217,12 +217,6 @@
                     </ul>
                 </div>
             </nav>
-            <script>
-                // $('.dropdown-toggle').off().on("click", function(e) {
-                //     e.preventDefault();
-                //     window.location = $(this).attr('href');
-                // });
-            </script>
         </header>
         <?php
     }
@@ -244,14 +238,14 @@
                         <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0" target="_blank"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
                     </p>
                     <h5>Nhà tài trợ</h5>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
-                    <div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
                 </div>
                 <div class="col-md-4">
                     <h5>Map</h5>
