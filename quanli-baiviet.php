@@ -2,31 +2,29 @@
     require("./lib.php");
 ?>
 <?php contentTop("Quản lí bài viết"); ?>
-<div class="row container mx-auto mt-5">
-    <h3>QUẢN LÍ BÀI VIẾT</h3>
-    <table class="table col-md-12">
-        <tbody>
-            <?php
-            $data_product = lay_bai_viet();
-            if(sizeof($data_product)>0) {
-                for($i=0; $i<sizeof($data_product); $i++) {
-                    ?>
-                    <tr>
-                        <td><a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></td>
-                        <td class="text-right"><a class="btn btn-success text-white" href="./edit-baiviet.php?id=<?php echo $data_product[$i]['id']; ?>">Sửa</a> <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?postid=<?php echo $data_product[$i]['id']; ?>">Xóa</button></td>
-                    </tr>
-                </div>
-                    <!--end_product-->
-                    <?php
-                }
-            }
-            else {
+<h3>QUẢN LÍ BÀI VIẾT<small><a class='text-muted ml-2 text-decoration-none' style='font-size: 14px' href='./upload-baiviet.php'>Thêm bài viết</a></small></h3>
+<table class="table">
+    <tbody>
+        <?php
+        $data_product = lay_bai_viet("","",false,false);
+        if(sizeof($data_product)>0) {
+            for($i=0; $i<sizeof($data_product); $i++) {
                 ?>
-                <td colspan=2>TẠM THỜI CHƯA CÓ BÀI VIẾT</td>
+                <tr>
+                    <td><a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></td>
+                    <td class="text-right"><a class="btn btn-success text-white" href="./edit-baiviet.php?id=<?php echo $data_product[$i]['id']; ?>">Sửa</a> <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?postid=<?php echo $data_product[$i]['id']; ?>">Xóa</button></td>
+                </tr>
+            </div>
+                <!--end_product-->
                 <?php
             }
+        }
+        else {
             ?>
-        </tbody>
-    </table>
-</div>
+            <td colspan=2>TẠM THỜI CHƯA CÓ BÀI VIẾT</td>
+            <?php
+        }
+        ?>
+    </tbody>
+</table>
 <?php contentBottom(false); ?>

@@ -1,11 +1,13 @@
 <?php
 	// connect database
 	$db_host = "localhost";
-	$db_user = "kshinedo_logka";
-	$db_pass = "jikmli";
+	// $db_user = "hayholif_logka";
+	// $db_pass = "k3uYMu4s34";
+	$db_user = "root";
+	$db_pass = "";
 	$db_connect = mysqli_connect($db_host, $db_user, $db_pass) or die ("error connect");
 	// tạo cơ sở dữ liệu
-	$db_name = "kshinedo_logka";
+	$db_name = "hayholif_logka";
 	$db_query = "CREATE DATABASE IF NOT EXISTS ".$db_name." CHARACTER SET 'utf8' COLLATE 'utf8_unicode_ci';";
 	mysqli_query($db_connect, $db_query) or die("create database error");
 	mysqli_select_db($db_connect, $db_name) or die("select database error");

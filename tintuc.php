@@ -9,7 +9,7 @@
               <div class="col-md-8">
                  <div id="tintuc" class="row m-0">
                     <?php
-                    $data_product = lay_bai_viet();
+                    $data_product = lay_bai_viet("","",false,true);
                     if(sizeof($data_product)>0) {
                         ?>
                         <h3 class="d-block w-100 mb-3">Tin tức - sự kiện: </h3>

@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+
 /* Global */
 .trungtam {
     position: relative;
@@ -16,24 +18,104 @@ header {
 /* Main banner */
 
 /* Navbar */
-.dropdown-toggle::after {
-	font-size: 35px;
-	vertical-align: baseline;
+.menu * {
+    text-transform: uppercase;
+    list-style: none;
 }
-.dropdown:hover>.dropdown-menu {
+.menu {
+    background-color: #f8f9fa;
+    display: flex;
+    justify-content: center;
+}
+.menu>ul {
+    margin: 0;
+    padding: 0;
+}
+.menu>ul>li {
+    float:left;
+    display: inline-block;;
+    height: 100%
+}
+.menu>ul>li>a {
+    display: inline-block;
+    padding: 1em;
+    color: gray;
+}
+.menu>ul>li>form {
+    height: 100%;
+}
+.menu>ul>li>ul {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    background: white;
+    padding: 1em;
+    margin-top: 0em;
+    z-index: 99999;
+    border: 1px solid gray;
+    border-radius: .2em;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.menu>ul>li>ul li {
     display: block;
+    width: 100%;
 }
-.dropdown > .dropdown-toggle:active {
-    /*Without this, clicking will make it sticky*/
-    pointer-events: none;
+.menu>ul>li>ul li a {
+    display: block;
+    width: 100%;
+    color: black!important;
+    padding: .1em .1em;
 }
-a.dropdown-toggle {
-    padding: 5px!important;
-    border: 1px solid black;
+.menu>ul>li>ul>li>ul {
+    margin-left: -1.5em;
 }
-#main-menu li {
-	padding: 0 5px;
+.menu>ul>li>a:hover> {
+    color: black!important;
 }
+.menu>ul>li:hover>ul {
+    visibility: visible;
+    opacity: 1;
+    margin-top: -.3em;
+    -webkit-transition: all .1s ease-in-out;
+    -moz-transition: all .1s ease-in-out;
+    -ms-transition: all .1s ease-in-out;
+    -o-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+
+/*Mobile nav*/
+.mmenu {
+    display: block;
+    overflow: auto;
+}
+.mmenu>ul>li {
+    width: 100%;
+}
+.mmenu>ul>li>a {
+    width: 100%;
+    padding: .5em 1em;
+}
+.mmenu>ul>li>form {
+    height: auto;
+    padding: .5em 1em;
+}
+.mmenu>ul>li>ul {
+    position: relative;
+    padding-left: 2em;
+    width: 90%;
+    margin: 0 auto;
+    margin-top: .5em;
+    visibility: visible;
+    opacity: 1;
+}
+.mmenu>ul>li:hover>ul {
+    margin-top: .5em;
+}
+
 /* Section */
 section {
     margin-bottom: 20px;
@@ -43,20 +125,9 @@ section.data-section {
 }
 section>h2>a {
     color: black;
-    text-decoration: bold;
-    border-bottom: 3px solid black;
+    text-decoration: none;
     margin-left: -15px;
     text-transform: uppercase;
-    -webkit-transition: all 300ms ease-in-out;
-    -moz-transition: all 300ms ease-in-out;
-    -ms-transition: all 300ms ease-in-out;
-    -o-transition: all 300ms ease-in-out;
-    transition: all 300ms ease-in-out;
-}
-section>h2>a:hover {
-    color: brown!important;
-    text-decoration: none;
-    border-bottom: 3px solid brown;
     -webkit-transition: all 300ms ease-in-out;
     -moz-transition: all 300ms ease-in-out;
     -ms-transition: all 300ms ease-in-out;
@@ -115,21 +186,11 @@ section>h2>a:hover {
 }
 
 /* Footer */
-footer .col-md-4 {
-    /*padding: 20px;*/
-}
-footer .fa {
-    font-size: 50px;
-    padding-right: 10px;
-    color: gray;
-    -webkit-transition: all 300ms ease-in-out;
-    -moz-transition: all 300ms ease-in-out;
-    -ms-transition: all 300ms ease-in-out;
-    -o-transition: all 300ms ease-in-out;
-    transition: all 300ms ease-in-out;
+footer * {
+    font-family: 'Roboto', san-serif;
 }
 footer h5 {
     margin-bottom: 15px;
-    border-bottom: 2px dashed white;
+    border-bottom: 2px solid white;
     padding-bottom: 10px;
 }

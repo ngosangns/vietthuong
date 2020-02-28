@@ -8,9 +8,9 @@ if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) {
         setcookie('password',"", time()-100, "/");
         unset($_COOKIE['userid']);
         unset($_COOKIE['password']);
-        die_custom("Đăng xuất thành công.", "./");
+        header("Location: ./");
     }
-    die_custom("Bạn đã đăng nhập.", "./upload-sanpham.php");
+    die_custom("Bạn đã đăng nhập.", "./quanli-sanpham.php");
 }
 // lấy dữ liệu ở form
 if (isset($_POST['username']) && isset($_POST['password'])) {
@@ -31,33 +31,29 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     // tạo cookie nếu đã kiểm tra xong
     setcookie('userid', $user_array[0]['id'], time() + 60*60*24*30, "/");
     setcookie('password',$user_array[0]['password'], time() + 60*60*24*30, "/");
-    die_custom("Đăng nhập thành công.", "./upload-sanpham.php");
+    header("Location: ./upload-sanpham.php");
 }
 mysqli_close($db_connect);
 ?>
 <?php contentTop("Đăng nhập"); ?>
-<div class="content">
-    <div id="content" class="container p-0 mt-5 mb-5">
-        <div class="row">
-            <div class="col-md-6 mx-auto">
-                <h2>ĐĂNG NHẬP</h2><br/>
-                <form method="POST" action="login.php" role="form" enctype="multipart/form-data">
-                    <div class="form-group row">
-                        <label for="username" class="col-form-label col-md-3">Username</label>
-                        <div class="col-md-9">
-                            <input type="text" class="form-control" id="username" name="username">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="password" class="col-form-label col-md-3">Password</label>
-                        <div class="col-md-9">
-                            <input type="password" class="form-control" name="password">
-                        </div>
-                    </div><br/>
-                    <button type="submit" class="btn btn-success" name="submit">Đăng nhập</button>
-                </form>
+<div class="row">
+    <div class="col-md-6 mx-auto">
+        <h2>ĐĂNG NHẬP</h2><br/>
+        <form method="POST" action="login.php" role="form" enctype="multipart/form-data">
+            <div class="form-group row">
+                <label for="username" class="col-form-label col-md-3">Username</label>
+                <div class="col-md-9">
+                    <input type="text" class="form-control" id="username" name="username">
+                </div>
             </div>
-        </div>
+            <div class="form-group row">
+                <label for="password" class="col-form-label col-md-3">Password</label>
+                <div class="col-md-9">
+                    <input type="password" class="form-control" name="password">
+                </div>
+            </div><br/>
+            <button type="submit" class="btn btn-success" name="submit">Đăng nhập</button>
+        </form>
     </div>
 </div>
 <?php contentBottom(false); ?>

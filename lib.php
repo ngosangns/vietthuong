@@ -1,10 +1,16 @@
 <?php
 	require("dbconnect.php"); // $db_connect $GLOBALS['db_connect']
 
-    if(isset($_POST['lay_san_pham'])) {
-        echo json_encode(lay_san_pham()); die();
-    }
 
+
+
+
+
+
+
+
+
+    // Linh tinh
     // check ki tu dac biet
     function check_special(string $string_query)
     {
@@ -13,62 +19,6 @@
     function remove_special(string $string_query)
     {
         return preg_replace("/[!#$%^&*\=\[\]{};':\"\\<>\/?]/", "", $string_query);
-    }
-
-    // lay san pham tu mySQL
-    function lay_san_pham(string $query_key="", string $query_data="") {
-        if($query_key == "") {
-            $db_query = "SELECT * FROM `product`"." ORDER BY `id` DESC";
-        }
-        else {
-            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".addslashes($query_data)."'"." ORDER BY `id` DESC";
-        }
-        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
-        $array_sp = [];
-        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
-            $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
-            $array_sp[] = $sanpham;
-        }
-        return $array_sp;
-    }
-    function lay_bai_viet(string $query_key="", string $query_data="", bool $onlyhot = false) {
-        if($query_key == "") {
-            $db_query = "SELECT * FROM `post`"." WHERE `displaytt` = 1".($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
-        }
-        else {
-            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".addslashes($query_data)."'"." AND `displaytt` = 1".($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
-        }
-        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin sản phẩm");
-        $array_sp = [];
-        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
-            $array_sp[] = $sanpham;
-        }
-        return $array_sp;
-    }
-    function kt_level(string $iduser, string $password="") {
-        if(check_special($iduser)||check_special($password)) die_custom("Cookie không được chứa kí tự đặc biệt.", "./");
-        if($password=="") $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."'";
-        else $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."' AND `password`='".addslashes($password)."'";
-        $result = mysqli_query($GLOBALS['db_connect'], $sql_query);
-        $result = mysqli_fetch_assoc($result);
-        if(isset($result['username'])) return 1;
-        else return 0;
-    }
-    function search(string $search_query, string $layout = "product", string $excludee = "") {
-        $search_query = trim($search_query);
-        $excludee = trim($excludee);
-        if(check_special($search_query)) die_custom("Query không được chứa kí tự đặc biệt.", "./");
-        $excludee_query = "";
-        if($excludee != "") $excludee_query = " AND NOT `id` = ".addslashes($excludee);
-        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".addslashes($search_query)."%' OR `category` LIKE '%".addslashes($search_query)."%')".addslashes($excludee_query)." ORDER BY `id` DESC";
-        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $sql_query) or die("không thể lấy thông tin sản phẩm");
-        $array_sp = [];
-        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
-            if($layout == "product")
-                $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
-            $array_sp[] = $sanpham;
-        }
-        return $array_sp;
     }
     function die_custom(string $string_query="", string $target_location="") {
         ?>
@@ -95,257 +45,46 @@
         <?php
         die();
     }
-    // element
-    function head($string) {
-        ?>
-        <head>
-            <!-- Required meta tags -->
-            <meta charset="utf-8">
-            <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-            <title><?php echo $string; ?></title>
-            <link rel="shortcut icon" type="image/png" href="./image/logo.png">
-            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-            <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-            <link rel="stylesheet" href="./css/style.css">
-            <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
-            <script src="./js/sanpham.js"></script>
-            <script>
-                function confirmDelete(dbutton) {
-                    if(confirm("Bạn có chắc chắn muốn xóa không?"))
-                        try {window.location = $(dbutton).attr("href"); } catch(e) {}
-                }
-            </script>
-        </head>
-        <?php
-    }
-    function nav() { // menu trang web
-        ?>
-		<header>
-            <div id="header-banner">
-                <center>
-                    <div id="main-banner">
-                        <a id="main-link">
-                            <img id="main-image" class="img-fluid w-100" src="https://2.pik.vn/2020c7f76fbf-07ea-4557-bf98-86f2341c5ae0.png"/>
-                        </a>
-                    </div>
-                </center>
-            </div>
-            <nav id="main-menu" class="navbar navbar-expand-lg navbar-light bg-light">
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
-                    <ul class="navbar-nav mx-auto mt-2 mt-lg-0">
-                        <li class="nav-item">
-                            <a class="nav-link" href="/">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./baiviet.php?id=15">GIỚI THIỆU</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./tintuc.php">TIN TỨC-SỰ KIỆN</a>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link d-inline-block" href="./#daotao">ĐÀO TẠO</a>
-                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./baiviet.php?id=6">- KHÓA HỌC PIANO</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=10">- KHÓA HỌC GUITAR</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=13">- KHÓA HỌC UKULELE</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=14">- KHÓA HỌC VIOLIN</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=11">- KHÓA HỌC ORGAN</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=12">- KHÓA HỌC THANH NHẠC</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=9">- KHÓA HỌC ABRSM</a>
-                                <a class="dropdown-item" href="./baiviet.php?id=2">- ĐÀO TẠO NHẠC CÔNG</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link d-inline-block" href="./search.php">SẢN PHẨM</a>
-                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./search.php?search=Piano">ĐÀN PIANO</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="./search.php?search=Grand Piano">- GRAND PIANO</a>
-                                <a class="dropdown-item" href="./search.php?search=Upright Piano">- UPRIGHT PIANO</a>
-                                <a class="dropdown-item" href="./search.php?search=Digital Piano">- DIGITAL PIANO</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="./search.php?search=Guitar">ĐÀN GUITAR</a>
-                                <a class="dropdown-item" href="./search.php?search=Organ">ĐÀN ORGAN</a>
-                                <a class="dropdown-item" href="./search.php?search=Ukulele">ĐÀN UKULELE</a>
-                                <a class="dropdown-item" href="./search.php?search=Violin">ĐÀN VIOLIN</a>
-                            </div>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./#dichvuchinh">DỊCH VỤ</a>
-                        </li>
-                        <?php
-                            if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) {
-                                if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) {
-                                    ?>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link d-inline-block" href="#daotao">ADMIN</a>
-                            <a class="nav-link d-inline-block dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" href="./upload-sanpham.php">ĐĂNG SẢN PHẨM</a>
-                                <a class="dropdown-item" href="./upload-baiviet.php">ĐĂNG BÀI VIẾT</a>
-                                <a class="dropdown-item" href="./quanli-sanpham.php">QUẢN LÍ SẢN PHẨM</a>
-                                <a class="dropdown-item" href="./quanli-baiviet.php">QUẢN LÍ BÀI VIẾT</a>
-                                <a class="dropdown-item" href="./login.php?logout">ĐĂNG XUẤT</a>
-                            </div>
-                        </li>
-                                    <?php
-                                }
-                                else {
-                                    die_custom("User không đúng", "./login.php?logout");
-                                }
-                            }
-                            else {
-                                ?>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./login.php">ĐĂNG NHẬP</a>
-                        </li>
-                                <?php
-                            }
-                        ?>
-                        <form class="form-inline my-2 my-lg-0" action="./search.php" method="get">
-                            <input class="form-control mr-sm-2" type="text" name="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">
-                            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
-                        </form>
-                    </ul>
-                </div>
-            </nav>
-        </header>
-        <?php
-    }
-    function foot() { // chan trang web
-        ?>
-		<footer class="bg-dark text-white mt-5">
-		    <div class="row p-4">
-    		    <div class="col-md-4">
-                    <h5>Công ty ROSE 9</h5>
-                    <p>
-                        Số điện thoại: <b>+1234567890</b><br/>
-                        Địa chỉ: <b>188/1 Nguyễn Văn Hưởng, Thảo Điền, Quận 2, Hồ Chí Minh</b><br/>
-                    </p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Social</h5>
-                    <p>
-                        <a href="https://www.facebook.com/hayho.life" target="_blank"><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
-                        <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0" target="_blank"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
-                    </p>
-                    <h5>Nhà tài trợ</h5>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                    <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                </div>
-                <div class="col-md-4">
-                    <h5>Map</h5>
-                    <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
-                </div>
-		    </div>
-        </footer>
-        <script>
-            // Fixed menu on scroll
-            window.onscroll = function() { fixedMenu() };
-            var mainMenu = document.getElementById("main-menu");
-            var stickyMenu = mainMenu.offsetTop;
-            function fixedMenu() {
-                if (window.pageYOffset > stickyMenu) {
-                    mainMenu.classList.add("fixed-top");
-                } else {
-                    mainMenu.classList.remove("fixed-top");
-                }
-            }
 
-            var mapContent = document.getElementById("map-content");
-            var iGrid = document.querySelectorAll(".iGrid");
-            var iTin = document.querySelectorAll(".iTin .col-md-4");
-            var iYoutubeVideos = document.querySelectorAll(".iYoutubeVideos .col-md-7 iframe");
-            var iTrungTam = document.querySelectorAll(".trungtam");
-            var carouselItems = document.querySelectorAll(".carousel-item img");
-                
-            // Window onresize event
-            window.addEventListener("resize", responsiveWidth);
-            // Set height to responsive elements
-            function responsiveWidth() {
-                if(mapContent!=null)
-                    mapContent.height = mapContent.offsetWidth;
-                for(var i=0; i<iGrid.length; i++)
-                    iGrid[i].style.cssText += "; height: "+iGrid[i].offsetWidth*0.5+"px;";
-                for(var i=0; i<iTin.length; i++)
-                    iTin[i].style.cssText += "; height: "+iTin[i].offsetWidth*0.5+"px;";
-                for(var i=0; i<iYoutubeVideos.length; i++)
-                    iYoutubeVideos[i].setAttribute("height", iYoutubeVideos[i].offsetWidth*0.5+"px");
-                for(var i=0; i<iTrungTam.length; i++)
-                    iTrungTam[i].style.cssText += "; top: "+(iTrungTam[i].parentElement.offsetHeight-iTrungTam[i].offsetHeight)*0.5+"px;";
-            }
-            responsiveWidth();
-        </script>
-        <?php
-    }
-    function contentTop(string $titleHeader = "") {
-        ?>
-        <!DOCTYPE html>
-        <html>
-            <?php head($titleHeader); ?>
-            <body>
-                <div id="container" class="container mx-auto p-0 m-0">
-        <?php nav(); ?>
-        <div class="mt-5"></div>
-        <?php
-    }
-    function contentBottom($enableFoot = true) {
-        if($enableFoot) foot();
-        else {
-            ?>
-            <footer class="mt-5"></footer>
-            <?php
+
+
+
+
+
+
+
+
+    // API
+    function lay_san_pham(string $query_key="", string $query_data="") {
+        if($query_key == "") {
+            $db_query = "SELECT * FROM `product`"." ORDER BY `id` DESC";
         }
-        ?>
-                </div>
-                <!-- Load Facebook SDK for JavaScript -->
-                  <div id="fb-root"></div>
-                  <script>
-                    window.fbAsyncInit = function() {
-                      FB.init({
-                        xfbml            : true,
-                        version          : 'v6.0'
-                      });
-                    };
-            
-                    (function(d, s, id) {
-                    var js, fjs = d.getElementsByTagName(s)[0];
-                    if (d.getElementById(id)) return;
-                    js = d.createElement(s); js.id = id;
-                    js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-                    fjs.parentNode.insertBefore(js, fjs);
-                  }(document, 'script', 'facebook-jssdk'));</script>
-            
-                  <!-- Your customer chat code -->
-                  <div class="fb-customerchat"
-                    attribution=setup_tool
-                    page_id="100566578194928">
-                  </div>
-            </body>
-        </html>
-        <?php
+        else {
+            $db_query = "SELECT * FROM `product` WHERE `".$query_key."`='".addslashes($query_data)."'"." ORDER BY `id` DESC";
+        }
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die_custom("không thể lấy thông tin sản phẩm");
+        $array_sp = [];
+        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
+            $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
+            $array_sp[] = $sanpham;
+        }
+        return $array_sp;
     }
-    function checkDangNhap() {
-        if(!isset($_COOKIE['userid']) || !isset($_COOKIE['password'])) die_custom("Bạn chưa đăng nhập", "./login.php");
-        if(kt_level($_COOKIE['userid'], $_COOKIE['password'])==0) die_custom("Tài khoản sai", "./login.php?logout");
-    }
-    function displayforLogged() {
-        if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) return true;
-        return false;
+
+    function lay_bai_viet(string $query_key="", string $query_data="", bool $onlyhot = false, $enavleDisplaytt = true) {
+        if($query_key == "") {
+            $db_query = "SELECT * FROM `post`"." WHERE 1=1".($enavleDisplaytt?" AND `displaytt` = 1":"").($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
+        }
+        else {
+            $db_query = "SELECT * FROM `post` WHERE `".$query_key."`='".addslashes($query_data)."'".($enavleDisplaytt?" AND `displaytt` = 1":"").($onlyhot?" AND `dangdienra` = 1":"")." ORDER BY `id` DESC";
+        }
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $db_query) or die("không thể lấy thông tin bài viết");
+        $array_sp = [];
+        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
+            $array_sp[] = $sanpham;
+        }
+        return $array_sp;
     }
     function addContent(string $layout, string $action) {
         // Kiểm tra name/category
@@ -382,7 +121,7 @@
             if($action == "edit") $sql_query = "UPDATE `post` SET `name` = '".addslashes($_POST['name'])."', `dangdienra` = ".$dangdienra.", `displaytt` = '".$displaytt."', `category` = '".addslashes($_POST['category'])."', `image` = '".addslashes($avatar_path)."', `descr` = '".addslashes($descr)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
             else $sql_query = "INSERT INTO `post`(`name`, `displaytt`, `dangdienra`, `category`, `image`, `descr`, `comment`) VALUES('".addslashes($_POST['name'])."', ".$displaytt.", ".$dangdienra.", '".addslashes($_POST['category'])."', '".addslashes($avatar_path)."', '".addslashes($descr)."', '".addslashes($comment)."')";
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật bài viết");
-            die_custom("Cập nhật bài viết thành công", "./quanli-baiviet.php");
+            header("Location: ./quanli-baiviet.php");
         }
         if($layout == "product") {
             // Kiếm tra code sản phẩm
@@ -394,7 +133,371 @@
             if($action == "edit") $sql_query = "UPDATE `product` SET `code` = '".addslashes($_POST['code'])."', `name` = '".addslashes($_POST['name'])."', `category` = '".addslashes($_POST['category'])."', `price` = '".addslashes($giasp)."', `image` = '".addslashes($avatar_path)."', `comment` = '".addslashes($comment)."' WHERE `id` = ".addslashes($id);
             else $sql_query = "INSERT INTO `product`(`code`, `name`, `category`, `price`, `image`, `comment`) VALUES('".addslashes($_POST['code'])."', '".addslashes($_POST['name'])."', '".addslashes($_POST['category'])."', ".addslashes($giasp).", '".addslashes($avatar_path)."', '".addslashes($comment)."')";
             mysqli_query($GLOBALS['db_connect'], $sql_query) or die_custom("Lỗi khi cập nhật sản phẩm");
-            die_custom("Cập nhật sản phẩm thành công", "./quanli-sanpham.php");
+            header("Location: ./quanli-sanpham.php");
         }
+    }
+
+
+
+
+
+
+
+
+
+
+    // Authorize
+    function kt_level(string $iduser, string $password="") {
+        if(check_special($iduser)||check_special($password)) die_custom("Cookie không được chứa kí tự đặc biệt.", "./");
+        if($password=="") $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."'";
+        else $sql_query = "SELECT `username` FROM `user` WHERE `id`='".addslashes($iduser)."' AND `password`='".addslashes($password)."'";
+        $result = mysqli_query($GLOBALS['db_connect'], $sql_query);
+        $result = mysqli_fetch_assoc($result);
+        if(isset($result['username'])) return 1;
+        else return 0;
+    }
+    function checkDangNhap() {
+        if(!isset($_COOKIE['userid']) || !isset($_COOKIE['password'])) die_custom("Bạn chưa đăng nhập", "./login.php");
+        if(kt_level($_COOKIE['userid'], $_COOKIE['password'])==0) die_custom("Tài khoản sai", "./login.php?logout");
+    }
+    function displayforLogged() {
+        if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) return true;
+        return false;
+    }
+
+
+
+
+
+
+
+
+
+
+    // Search
+    function search(string $search_query, string $layout = "product", string $excludee = "") {
+        $search_query = trim($search_query);
+        $excludee = trim($excludee);
+        if(check_special($search_query)) die_custom("Query không được chứa kí tự đặc biệt.", "./");
+        $excludee_query = "";
+        if($excludee != "") $excludee_query = " AND NOT `id` = ".addslashes($excludee);
+        $sql_query = "SELECT * FROM `".$layout."` WHERE (`name` LIKE '%".addslashes($search_query)."%' OR `category` LIKE '%".addslashes($search_query)."%')".addslashes($excludee_query)." ORDER BY `id` DESC";
+        $db_sanpham = mysqli_query($GLOBALS['db_connect'], $sql_query) or die("không thể lấy thông tin sản phẩm");
+        $array_sp = [];
+        while($sanpham = mysqli_fetch_assoc($db_sanpham)) {
+            if($layout == "product")
+                $sanpham['price'] = intval($sanpham['price'])==0?"Liên hệ":number_format($sanpham['price'])." VND"; // xu li price
+            $array_sp[] = $sanpham;
+        }
+        return $array_sp;
+    }
+
+
+
+
+
+
+
+
+
+
+    // Template
+    function contentTop(string $titleHeader = "", $enableSlide = false) {
+        ?>
+        <!DOCTYPE html>
+        <html>
+            <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+                <!-- Required meta tags -->
+                <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+                <title><?php echo $titleHeader; ?> - ROSE 9</title>
+                <link rel="shortcut icon" type="image/png" href="./image/logo.png">
+                <link rel="stylesheet" href="./css/bootstrap.min.css" crossorigin="anonymous">
+
+                <script src="./js/jquery-3.3.1.min.js" crossorigin="anonymous"></script>
+                <script src="./js/popper.min.js" crossorigin="anonymous"></script>
+                <script src="./js/bootstrap.min.js" crossorigin="anonymous"></script>
+
+                <link rel="stylesheet" href="./css/style.css">
+                <link rel="stylesheet" href="./css/font-awesome.min.css">
+
+                <script src="./js/sanpham.js"></script>
+                <script>
+                    function confirmDelete(dbutton) {
+                        if(confirm("Bạn có chắc chắn muốn xóa không?"))
+                            try {window.location = $(dbutton).attr("href"); } catch(e) {}
+                    }
+                </script>
+            </head>
+            <body>
+                <div id="container" class="w-100 mx-auto m-0">
+                <header>
+                    <div id="header-banner">
+                        <center>
+                            <div id="main-banner">
+                                <a id="main-link">
+                                   <img id="main-image" class="img-fluid w-100" src="https://3.pik.vn/202065fc6e0a-3fa9-4fb3-8be8-936303567c06.png"/>
+                                </a>
+                            </div>
+                        </center>
+                    </div>
+                    <nav id="menu" class="menu">
+                        <button id="toggleMenu" class="btn btn-outline-secondary d-none m-3">Menu</button>
+                        <ul>
+                            <li><a href="/">HOME</a></li>
+                            <li><a href="./baiviet.php?id=15">GIỚI THIỆU</a></li>
+                            <li><a href="./tintuc.php">TIN TỨC-SỰ KIỆN</a></li>
+                            <li><a href="./#daotao">ĐÀO TẠO</a>
+                                <ul>
+                                    <li><a href="./baiviet.php?id=12">KHÓA HỌC PIANO</a></li>
+                                    <li><a href="./baiviet.php?id=10">KHÓA HỌC GUITAR</a></li>
+                                    <li><a href="./baiviet.php?id=7">KHÓA HỌC UKULELE</a></li>
+                                    <li><a href="./baiviet.php?id=11">KHÓA HỌC VIOLIN</a></li>
+                                    <li><a href="./baiviet.php?id=8">KHÓA HỌC ORGAN</a></li>
+                                    <li><a href="./baiviet.php?id=9">KHÓA HỌC THANH NHẠC</a></li>
+                                    <li><a href="./baiviet.php?id=6">KHÓA HỌC ABRSM</a></li>
+                                    <li><a href="./baiviet.php?id=5">ĐÀO TẠO NHẠC CÔNG</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./#sanpham">SẢN PHẨM</a>
+                                <ul>
+                                    <li><a href="./search.php?search=Piano">ĐÀN PIANO</a>
+                                        <ul>
+                                            <li><a href="./search.php?search=Grand Piano">- GRAND PIANO</a></li>
+                                            <li><a href="./search.php?search=Upright Piano">- UPRIGHT PIANO</a></li>
+                                            <li><a href="./search.php?search=Digital Piano">- DIGITAL PIANO</a></li>
+                                        </ul>
+                                    </li>
+                                    <li><a href="./search.php?search=Guitar">ĐÀN GUITAR</a></li>
+                                    <li><a href="./search.php?search=Organ">ĐÀN ORGAN</a></li>
+                                    <li><a href="./search.php?search=Ukulele">ĐÀN UKULELE</a></li>
+                                    <li><a href="./search.php?search=Violin">ĐÀN VIOLIN</a></li>
+                                </ul>
+                            </li>
+                            <li><a href="./#dichvuchinh">DỊCH VỤ</a></li>
+                    <?php
+                    if(isset($_COOKIE['userid']) && isset($_COOKIE['password'])) {
+                        if(kt_level($_COOKIE['userid'], $_COOKIE['password'])>0) { ?>
+                            <li>
+                                <a href="./quanli-sanpham.php">ADMIN</a>
+                                <ul>
+                                    <li><a href="./quanli-sanpham.php">QUẢN LÍ SẢN PHẨM</a></li>
+                                    <li><a href="./quanli-baiviet.php">QUẢN LÍ BÀI VIẾT</a></li>
+                                    <li><a href="./login.php?logout">ĐĂNG XUẤT</a></li>
+                                </ul>
+                            </li>
+                        <?php }
+                        else die_custom("User không đúng", "./login.php?logout");
+                    }
+                    else { ?>
+                            <li>
+                                <a href="./login.php">ĐĂNG NHẬP</a>
+                            </li>
+                    <?php } ?>
+                            <li>
+                                <form class="form-inline" action="./search.php" method="get">
+                                    <input class="form-control mr-sm-2" type="text" name="search" placeholder="Tìm kiếm sản phẩm..." aria-label="Search">
+                                    <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Search</button>
+                                </form>
+                            </li>
+                        </ul>
+                    </nav>
+                    <?php
+                    if($enableSlide) {
+                        ?>
+                        <section id="iframe">
+                            <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                <div class="carousel-inner">
+                                    <div class="carousel-item active">
+                                      <img class="d-block w-100" src="./img/slide/s1.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s2.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s3.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s4.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s5.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s6.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s7.jpg">
+                                    </div>
+                                    <div class="carousel-item">
+                                      <img class="d-block w-100" src="./img/slide/s8.jpg">
+                                    </div>
+                                </div>
+                                <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Previous</span>
+                                </a>
+                                <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                    <span class="sr-only">Next</span>
+                                </a>
+                            </div>
+                        </section>
+                        <?php
+                    }
+                    ?>
+                </header>
+                <div id="content" class="container p-3">
+        <?php
+    }
+    function contentBottom($enableFoot = true) {
+        ?></div> <?php
+        if($enableFoot) {
+            ?>
+            <footer class="bg-dark text-white mt-5">
+                <div class="row p-4">
+                    <div class="col-md-4">
+                        <h5>Công ty ROSE 9</h5>
+                        <p>
+                            Cơ sở 1: <b> 71/25 Điện Biên Phủ, P15, q. Bình Thạnh, TP HCM.</b><br/>
+                            Cơ sở 2: <b>188/1 Nguyễn Văn Hưởng, p. Thảo Điền, Q2, TP HCM.</b><br/>
+
+                                Liên hệ: <b>0908 277 181 </b>
+                            
+                        </p>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Social -->
+                        <h5>Social</h5>
+                        <p>
+                            <a href="https://www.facebook.com/hayho.life" target="_blank"><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
+                            <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0" target="_blank"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
+                        </p>
+
+                        <!-- Nhà tài trợ -->
+                        <h5>Nhà tài trợ</h5>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                    </div>
+                    <div class="col-md-4">
+                        <!-- Map -->
+                        <h5>Map</h5>
+                        <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                    </div>
+                </div>
+            </footer>
+            </div>
+            <!-- Load Facebook SDK for JavaScript -->
+            <div id="fb-root"></div>
+            <script>
+            window.fbAsyncInit = function() {
+              FB.init({
+                xfbml            : true,
+                version          : 'v6.0'
+              });
+            };
+
+            (function(d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+            }(document, 'script', 'facebook-jssdk'));</script>
+
+            <!-- Your customer chat code -->
+            <div class="fb-customerchat"
+                attribution=setup_tool
+                page_id="100566578194928"
+                theme_color="#a695c7">
+            </div>
+            <?php
+        }
+        else {
+            ?> <footer class="mt-5"></footer> <?php
+        }
+        ?>
+                <script>
+                    // Fixed menu on scroll
+                    window.onscroll = function() { fixedMenu() };
+                    var mainMenu = document.getElementById("menu");
+                    var stickyMenu = mainMenu.offsetTop;
+                    function fixedMenu() {
+                        if (window.pageYOffset > stickyMenu) {
+                            mainMenu.classList.add("fixed-top");
+                        } else mainMenu.classList.remove("fixed-top");
+                    }
+                    // Slide
+                    var carouselItems = document.querySelectorAll(".carousel-item img");
+
+
+                    // Window onresize event
+                    window.addEventListener("resize", responsiveWidth);
+                    // Set height to responsive elements
+                    function responsiveWidth() {
+                        // Responsive menu
+                        if(window.innerWidth < 1100) {
+                            if(!$('#menu').hasClass('mmenu')) $('#menu').addClass('mmenu');
+                            $('#menu').css('max-height', window.innerHeight);
+                            if(!$('#menu>ul').hasClass('d-none')) $('#menu>ul').addClass('d-none');
+                            if(!$('#menu>ul>li>ul').hasClass('d-none')) $('#menu>ul>li>ul').addClass('d-none');
+                            if($('#menu>button').hasClass('d-none')) $('#menu>button').removeClass('d-none');
+                            if(!$('#menu>ul>li>form').hasClass('pb-4')) $('#menu>ul>li>form').addClass('pb-4');
+                            $('#menu>ul>li').each((index, item) => {
+                                if($(item).children('ul').length>0) {
+                                    if($(item).children('a').length==1)
+                                        $(item).children('a').after(`<a class="menu-dropdown-button pr-3" style="width: auto; position: relative; margin-top: -2.5em; right: 1em; float: right; text-align: right; z-index: 999999; cursor: pointer">▼</a>`);
+                                }
+                            })
+                        }
+                        else {
+                            $('#menu').removeClass('mmenu');
+                            $('#menu').css('max-height', 'auto');
+                            if($('#menu>ul').hasClass('d-none')) $('#menu>ul').removeClass('d-none');
+                            if($('#menu>ul>li>ul').hasClass('d-none')) $('#menu>ul>li>ul').removeClass('d-none');
+                            if(!$('#menu>button').hasClass('d-none')) $('#menu>button').addClass('d-none');
+                            if($('#menu>ul>li>form').hasClass('pb-4')) $('#menu>ul>li>form').removeClass('pb-4');
+                            if($('.menu-dropdown-button').length>0) $('.menu-dropdown-button').remove();
+                        }
+
+                        // Responsive section and map
+                        $("#map-content").css({ 'height': $("#map-content").width() });
+                        $(".iGrid").each((index, item) => {
+                            $(item).css({
+                                'height' : $(item).width()*.5+"px"
+                            })
+                        });
+                        $(".iTin .col-md-4").each((index, item) => {
+                            $(item).css({ 'height' : $(item).width()*.5+"px" })
+                        });
+                        $(".iYoutubeVideos .col-md-7 iframe").each((index, item) => {
+                            $(item).css({ 'height' : $(item).width()*.5+"px" })
+                        });
+                        $(".trungtam").each((index, item) => {
+                            $(item).css({ 'top' : ($(item).parent().height()-$(item).height())*.5+"px" })
+                        });
+                        $(".product-image").each((index, item) => {
+                            $(item).css({ 'height' : $(item).width() })
+                        });
+                    }
+                    responsiveWidth();
+
+                    // Menu toggle
+                    $('#toggleMenu').click(() => {
+                        $("#menu>ul").toggleClass('d-none');
+                    });
+                    $(document).on('click', '.menu-dropdown-button', function(e){
+                        e.preventDefault();
+                        $(this).parent().children('ul').toggleClass('d-none');
+                    });
+                </script>
+            </body>
+        </html>
+        <?php
     }
 ?>
