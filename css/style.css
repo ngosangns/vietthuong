@@ -89,33 +89,42 @@ header {
 
 /*Mobile nav*/
 .mmenu {
-    display: block;
-    overflow: auto;
+    display: block!important;
+    overflow: auto!important;
 }
 .mmenu>ul>li {
-    width: 100%;
+    width: 100%!important;
 }
 .mmenu>ul>li>a {
-    width: 100%;
-    padding: .5em 1em;
+    width: 100%!important;
+    padding: .5em 1em!important;
 }
 .mmenu>ul>li>form {
-    height: auto;
-    padding: .5em 1em;
+    height: auto!important;
+    padding: .5em 1em!important;
 }
 .mmenu>ul>li>ul {
-    position: relative;
-    padding-left: 2em;
-    width: 90%;
-    margin: 0 auto;
-    margin-top: .5em;
-    visibility: visible;
-    opacity: 1;
+    position: relative!important;
+    padding-left: 2em!important;
+    width: 90%!important;
+    margin: 0 auto!important;
+    margin-top: .5em!important;
+    visibility: visible!important;
+    opacity: 1!important;
 }
 .mmenu>ul>li:hover>ul {
-    margin-top: .5em;
+    margin-top: .5em!important;
 }
-
+.menu-dropdown-button {
+	width: auto!important; 
+	position: relative!important; 
+	margin-top: -2.5em!important; 
+	right: 1em!important; 
+	float: right!important; 
+	text-align: right!important; 
+	z-index: 999999!important; 
+	cursor: pointer!important
+}
 /* Section */
 section {
     margin-bottom: 20px;

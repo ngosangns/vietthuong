@@ -230,7 +230,7 @@
             </head>
             <body>
                 <div id="container" class="w-100 mx-auto m-0">
-                <header>
+                <header class="container">
                     <div id="header-banner">
                         <center>
                             <div id="main-banner">
@@ -451,7 +451,7 @@
                             $('#menu>ul>li').each((index, item) => {
                                 if($(item).children('ul').length>0) {
                                     if($(item).children('a').length==1)
-                                        $(item).children('a').after(`<a class="menu-dropdown-button pr-3" style="width: auto; position: relative; margin-top: -2.5em; right: 1em; float: right; text-align: right; z-index: 999999; cursor: pointer">▼</a>`);
+                                        $(item).children('a').after(`<a class="menu-dropdown-button pr-3">▼</a>`);
                                 }
                             })
                         }
