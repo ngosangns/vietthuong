@@ -15,11 +15,11 @@
       for($i=0; $i<sizeof($data_product); $i++) {
          ?>
          <!--start_product-->
-         <div class="p-2 shadow-sm" style="width: 33.33333333%">
+         <div class="rounded shadow">
             <div class="card border-0 p-0">
             <a href="./product.php?id=<?php echo $data_product[$i]['id']; ?>"><div class="product-image" style="width: 100%; height: 400px; overflow: hidden; background: url('<?php echo $data_product[$i]['image']; ?>') no-repeat center center; background-size: cover;"></div></a>
                <div class="card-body">
-                  <h5 class="card-title product-title title_sanpham"><a class="title_sanpham_a" href="./product.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></h5>
+                  <h5 class="card-title product-title title_sanpham"><a class="title_sanpham_a text-break" href="./product.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></h5>
                   <a class="card-text product-price"><?php echo $data_product[$i]['price']; ?></a><br/>
                </div>
             </div>

@@ -2,13 +2,22 @@
     require("./lib.php");
 ?>
 <?php contentTop("Home", true); ?>
+<style>
+	#content {
+		padding: 0!important;
+		background: transparent!important;
+	}
+</style>
+<script>
+	$("#content").removeClass('shadow');
+</script>
 <!-- Sản phẩm -->
-<section id="sanpham" class="data-section">
+<section id="sanpham" class="data-section p-4 mt-3 mb-3 shadow rounded">
 	<h2><a>Sản phẩm</a></h2>
 	<div id="sanpham-content" class="row"></div>
 </section>
 <!-- Đào tạo -->
-<section id="daotao" class="data-section">
+<section id="daotao" class="data-section p-4 mt-3 mb-3 shadow rounded">
 	<h2><a>Đào tạo</a></h2>
 	<div class="row">
 		<?php
@@ -29,7 +38,7 @@
 </section>
 
 <!-- Dịch vụ chính -->
-<section id="dichvuchinh" class="data-section">
+<section id="dichvuchinh" class="data-section p-4 mt-3 mb-3 shadow rounded">
 	<h2><a>Dịch vụ chính</a></h2>
 	<div id="dichvuchinh-content" class="row">
 		<?php
@@ -51,7 +60,7 @@
 	</div>
 </section>
 <!-- Youtube Videos -->
-<section id="youtubeVideos" class="data-section shadow-lg bg-secondary text-light rounded">
+<section id="youtubeVideos" class="data-section p-4 mt-3 mb-3 shadow rounded">
     <h2><a>Video</a></h2>
     <div id="youtubeVideos-content" class="row"></div>
 </section>
@@ -84,7 +93,7 @@
                                 </p>
                             </div>`;
             document.getElementById("youtubeVideos-content").innerHTML += `
-                <div class="col-md-12 iYoutubeVideos mt-4" `+(i<youtubeVideos.length-1?`style="border-bottom: 1px dashed white"`:``)+`>
+                <div class="col-md-12 iYoutubeVideos mt-4" `+(i<youtubeVideos.length-1?`style="border-bottom: 1px dashed #d9d9d9"`:``)+`>
                     <div class="row mb-4">
                         `+(i%2==0?(iImage+iContent):(iContent+iImage))+`
                     </div>

@@ -1,10 +1,10 @@
 <?php
 	// connect database
 	$db_host = "localhost";
-	// $db_user = "hayholif_logka";
-	// $db_pass = "k3uYMu4s34";
-	$db_user = "root";
-	$db_pass = "";
+	$db_user = "hayholif_logka";
+	$db_pass = "k3uYMu4s34";
+// 	$db_user = "root";
+// 	$db_pass = "";
 	$db_connect = mysqli_connect($db_host, $db_user, $db_pass) or die ("error connect");
 	// tạo cơ sở dữ liệu
 	$db_name = "hayholif_logka";

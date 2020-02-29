@@ -12,7 +12,7 @@
                 ?>
                 <tr>
                     <td><a href="./baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><?php echo $data_product[$i]['name']; ?></a></td>
-                    <td class="text-right"><a class="btn btn-success text-white" href="./edit-baiviet.php?id=<?php echo $data_product[$i]['id']; ?>">Sửa</a> <button class="btn btn-danger" type="button" onclick="confirmDelete(this)" href="./delete.php?postid=<?php echo $data_product[$i]['id']; ?>">Xóa</button></td>
+                    <td class="text-right"><a class="btn btn-success text-white mt-1 mb-1" href="./edit-baiviet.php?id=<?php echo $data_product[$i]['id']; ?>"><i class="fa fa-edit"></i></a> <button class="btn btn-danger mt-1 mb-1" type="button" onclick="confirmDelete(this)" href="./delete.php?postid=<?php echo $data_product[$i]['id']; ?>"><i class="fa fa-trash"></i></button></td>
                 </tr>
             </div>
                 <!--end_product-->
