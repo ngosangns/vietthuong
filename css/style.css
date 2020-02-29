@@ -30,11 +30,13 @@ header {
     margin: 0!important;
     padding: 0!important;
 }
+.menu li {
+	list-style-type: none!important;
+}
 .menu>ul>li {
     float:left!important;
     display: inline-block!important;
     height: 100%;
-    list-style-type: none!important;
 }
 .menu>ul>li>a {
     display: inline-block;
