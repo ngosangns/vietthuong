@@ -491,7 +491,12 @@
                     });
                     $(document).on('click', '.menu-dropdown-button', function(e){
                         e.preventDefault();
-                        $(this).parent().children('ul').toggleClass('d-none');
+                        let instance = $(this).parent().children('ul');
+                        let status = !instance.hasClass('d-none');
+                        $("#menu>ul>li>ul").each((index, item) => {
+                            if(!$(item).hasClass('d-none')) $(item).addClass('d-none');
+                        });
+                        if(!status) instance.removeClass('d-none');
                     });
                 </script>
             </body>

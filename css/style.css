@@ -158,16 +158,12 @@ header {
 }
 .mmenu>ul>li>ul {
     position: relative!important;
-    padding-left: 2em!important;
     width: 90%!important;
     margin: 0 auto!important;
-    margin-top: .5em!important;
+    margin-bottom: 1em!important;
     visibility: visible!important;
     opacity: 1!important;
-}
-.mmenu>ul>li:hover>ul {
-    margin-top: 0!important;
-    margin-bottom: 1em!important;
+    overflow: hidden!important;
 }
 .menu-dropdown-button {
 	width: auto!important; 
