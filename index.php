@@ -84,7 +84,7 @@
     function appendYoutubeVideos() {
         for(var i=0; i<youtubeVideos.length; i++) {
             var iImage = `<div class="col-md-7 `+(i%2==0?`mb-4`:``)+`">
-                            <iframe class="d-block w-100 rounded" `+youtubeVideos[i].link.match(/src=".+?"/i)+` frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                            <iframe class="d-block w-100 rounded" src="https://www.youtube.com/embed/`+youtubeVideos[i].link.match(/v=(.+?)$/i)[1]+`" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                         </div>`;
             var iContent = `<div class="col-md-5">
                                 <h5>`+youtubeVideos[i].name+`</h5>
