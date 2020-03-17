@@ -231,15 +231,15 @@
             <body>
                 <div id="container" class="w-100 mx-auto m-0">
                 <header class="container bg-white shadow rounded-bottom mb-3">
-                    <div id="header-banner">
-                        <center>
-                            <div id="main-banner">
-                                <a id="main-link">
-                                   <a href="/"><img id="main-image" class="img-fluid w-100" src="https://3.pik.vn/2020371cc3c7-9538-4923-8cb9-d89f075b24c8.png"/> </a>
-                                </a>
-                            </div>
-                        </center>
-                    </div>
+                    <!--<div id="header-banner">-->
+                    <!--    <center>-->
+                    <!--        <div id="main-banner">-->
+                    <!--            <a id="main-link">-->
+                    <!--               <a><img id="main-image" class="img-fluid w-100" src="https://3.pik.vn/2020371cc3c7-9538-4923-8cb9-d89f075b24c8.png"/> </a>-->
+                    <!--            </a>-->
+                    <!--        </div>-->
+                    <!--    </center>-->
+                    <!--</div>-->
                     <nav id="menu" class="menu bg-dark text-light">
                         <button id="toggleMenu" class="btn btn-outline-light d-none m-3"><i class="fa fa-bars"></i></button>
                         <ul>
@@ -354,66 +354,66 @@
             <footer class="bg-dark text-white mt-5">
                 <div class="row container mx-auto p-0">
                     <div class="col-md-4 p-4">
-                        <h5>Công ty ROSE 9</h5>
-                        <p>
-                            Cơ sở 1: <b> 71/25 Điện Biên Phủ, P15, q. Bình Thạnh, TP HCM.</b><br/>
-                            Cơ sở 2: <b>188/1 Nguyễn Văn Hưởng, p. Thảo Điền, Q2, TP HCM.</b><br/>
+                        <!--<h5>Công ty ROSE 9</h5>-->
+                        <!--<p>-->
+                        <!--    Cơ sở 1: <b> 71/25 Điện Biên Phủ, P15, q. Bình Thạnh, TP HCM.</b><br/>-->
+                        <!--    Cơ sở 2: <b>188/1 Nguyễn Văn Hưởng, p. Thảo Điền, Q2, TP HCM.</b><br/>-->
 
-                                Liên hệ: <b>0908 277 181 </b>
+                        <!--        Liên hệ: <b>0908 277 181 </b>-->
                             
-                        </p>
+                        <!--</p>-->
                     </div>
                     <div class="col-md-4 p-4">
                         <!-- Social -->
                         <h5>Social</h5>
                         <p>
-                            <a href="https://www.facebook.com/hayho.life" target="_blank"><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
-                            <a href="https://www.youtube.com/channel/UCSZPhRlK5mAycThqQMYHsNw?view_as=subscriber&fbclid=IwAR25KkVIVYMXDTZJvvw1WgcLQGW0j2G21lUeduI4T51ewtvjsE35gj0DWt0" target="_blank"><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
+                            <a><img class="rounded-pill mr-2" src="./img/facebook.png" alt="Facebook" width="20%"></a>
+                            <a><img class="rounded-pill" src="./img/youtube.png" alt="Youtube" width="20%"></a>
                         </p>
 
                         <!-- Nhà tài trợ -->
-                        <h5>Nhà tài trợ</h5>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
-                        <a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>
+                        <!--<h5>Nhà tài trợ</h5>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
+                        <!--<a  href="/"><div class="d-inline-block rounded-pill mr-2 mb-2" style="width: 70px; height: 70px; background-color: grey; background-image: url();"></div></a>-->
                     </div>
                     <div class="col-md-4 p-4">
                         <!-- Map -->
                         <h5>Map</h5>
-                        <iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+                        <!--<iframe id="map-content" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d6735.154011947664!2d106.72591466366434!3d10.816427401342537!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317526242b9ccde7%3A0x4531fcd4a75562f5!2zMTg4LzEgTmd1eeG7hW4gVsSDbiBIxrDhu59uZywgVGjhuqNvIMSQaeG7gW4sIFF14bqtbiAyLCBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1581011464456!5m2!1svi!2s" width="100%" frameborder="0" style="border:0;" allowfullscreen=""></iframe>-->
                     </div>
                 </div>
             </footer>
             </div>
             <!-- Load Facebook SDK for JavaScript -->
-            <div id="fb-root"></div>
-            <script>
-            window.fbAsyncInit = function() {
-              FB.init({
-                xfbml            : true,
-                version          : 'v6.0'
-              });
-            };
+            <!--<div id="fb-root"></div>-->
+            <!--<script>-->
+            <!--window.fbAsyncInit = function() {-->
+            <!--  FB.init({-->
+            <!--    xfbml            : true,-->
+            <!--    version          : 'v6.0'-->
+            <!--  });-->
+            <!--};-->
 
-            (function(d, s, id) {
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) return;
-            js = d.createElement(s); js.id = id;
-            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
-            fjs.parentNode.insertBefore(js, fjs);
-            }(document, 'script', 'facebook-jssdk'));</script>
+            <!--(function(d, s, id) {-->
+            <!--var js, fjs = d.getElementsByTagName(s)[0];-->
+            <!--if (d.getElementById(id)) return;-->
+            <!--js = d.createElement(s); js.id = id;-->
+            <!--js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';-->
+            <!--fjs.parentNode.insertBefore(js, fjs);-->
+            <!--}(document, 'script', 'facebook-jssdk'));</script>-->
 
             <!-- Your customer chat code -->
-            <div class="fb-customerchat"
-                attribution=setup_tool
-                page_id="100566578194928"
-                theme_color="#a695c7">
-            </div>
+            <!--<div class="fb-customerchat"-->
+            <!--    attribution=setup_tool-->
+            <!--    page_id="100566578194928"-->
+            <!--    theme_color="#a695c7">-->
+            <!--</div>-->
             <?php
         }
         else {

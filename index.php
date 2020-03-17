@@ -60,10 +60,10 @@
 	</div>
 </section>
 <!-- Youtube Videos -->
-<section id="youtubeVideos" class="data-section p-4 mt-3 mb-3 shadow rounded">
-    <h2><a>Video</a></h2>
-    <div id="youtubeVideos-content" class="row"></div>
-</section>
+<!--<section id="youtubeVideos" class="data-section p-4 mt-3 mb-3 shadow rounded">-->
+<!--    <h2><a>Video</a></h2>-->
+<!--    <div id="youtubeVideos-content" class="row"></div>-->
+<!--</section>-->
 <script src="./js/youtube.js"></script>
 <script>
 	// Sản phẩm
